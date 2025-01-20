@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:sharedUserId="com.renesas.wifi">
+
+    <!--<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH"
+        android:maxSdkVersion="30" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+        android:maxSdkVersion="30" />
+
+    <!-- Include "neverForLocation" only if you can strongly assert that
+    your app never derives physical location from Bluetooth scan results. -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+        android:usesPermissionFlags="neverForLocation" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <uses-feature
+        android:name="android.hardware.bluetooth_le"
+        android:required="true" />
+
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/renesas_ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup,android:theme,android:icon">
+
+        <activity
+            android:name="com.renesas.wifi.activity.SplashActivity"
+            android:launchMode="singleTask"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name="com.renesas.wifi.activity.MainActivity"
+            android:screenOrientation="portrait"
+            android:exported="true">
+        <intent-filter>
+            <action android:name="android.settings.WIFI_DPP_ENROLLEE_QR_CODE_SCANNER"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.renesas.wifi.activity.OpensourceActivity"
+            android:screenOrientation="portrait" /> <!-- ******************************** -->
+        <!-- DA16200 Provisioning -->
+        <!-- ******************************** -->
+        <activity
+            android:name="com.renesas.wifi.DA16200.activity.DA16200MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.renesas.wifi.DA16200.activity.SelectDeviceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.renesas.wifi.DA16200.activity.SelectNetworkActivity"
+            android:screenOrientation="portrait" /> <!-- ******************* -->
+        <!-- ******************* -->
+        <!-- DA16600 Provisioning -->
+        <!-- ******************* -->
+        <activity
+            android:name="com.renesas.wifi.DA16600.activity.DA16600MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.renesas.wifi.DA16600.activity.DeviceScanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.renesas.wifi.DA16600.activity.DeviceControlActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.renesas.wifi.DA16600.BluetoothLeService"
+            android:enabled="true" /> <!-- ************ -->
+        <!-- AWS IoT -->
+        <!-- ************ -->
+        <activity
+            android:name="com.renesas.wifi.awsiot.AWSIoTDeviceActivity"
+            android:screenOrientation="portrait"></activity> <!-- ************ -->
+        <!-- AWS IoT -->
+        <!-- ************ -->
+        <activity
+            android:name="com.renesas.wifi.awsiot.AWSIoTDoorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.renesas.wifi.awsiot.AWSIoTSensorActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.renesas.wifi.awsiot.log.LogActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.renesas.wifi.awsiot.setting.door.DoorSettingActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.renesas.wifi.awsiot.setting.sensor.SensorSettingActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+        <service
+            android:name="com.renesas.wifi.awsiot.MonitorService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name="com.renesas.wifi.awsiot.StopServiceReceiver"
+            android:enabled="true" />
+
+        <!-- Azure IoT -->
+        <!-- ************ -->
+        <activity
+            android:name="com.renesas.wifi.azureiot.AzureIoTDoorActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <!--<activity
+            android:name=".firmware.SupportActivity"
+            android:screenOrientation="portrait" />-->
+
+    </application>
+
+</manifest>

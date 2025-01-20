@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:/Users/livekim/Documents/work4/WiFiProvisioning_1.1/WiFiProvisioning.xcworkspace">
+   </FileRef>
+   <FileRef
+      location = "group:WiFiProvisioning.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>

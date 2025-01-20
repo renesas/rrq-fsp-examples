@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ****************************************************************************************
+ *
+ * @file contents_main.xml
+ *
+ * @brief Main Activity UI
+ *
+ * Copyright (c) 2023. Renesas Electronics. All rights reserved.
+ *
+ * This software ("Software") is owned by Renesas Electronics.
+ *
+ * By using this Software you agree that Renesas Electronics retains all
+ * intellectual property and proprietary rights in and to this Software and any
+ * use, reproduction, disclosure or distribution of the Software without express
+ * written permission or a license agreement from Renesas Electronics is
+ * strictly prohibited. This Software is solely for use on or in conjunction
+ * with Renesas Electronics products.
+ *
+ * EXCEPT AS OTHERWISE PROVIDED IN A LICENSE AGREEMENT BETWEEN THE PARTIES, THE
+ * SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. EXCEPT AS OTHERWISE
+ * PROVIDED IN A LICENSE AGREEMENT BETWEEN THE PARTIES, IN NO EVENT SHALL
+ * RENESAS ELECTRONICS BE LIABLE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL,
+ * OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+ * USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+ * OF THE SOFTWARE.
+ *
+ ****************************************************************************************
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.renesas.wifi.activity.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/blue3">
+
+        <ImageView
+            android:id="@+id/actionBarLeftBtnIv"
+            android:layout_width="56dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/outline_menu_white_48"
+            android:layout_marginStart="5dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:background="@color/colorTransparent"
+            android:gravity="center_vertical"
+            android:paddingBottom="20dp"
+            android:paddingTop="20dp"
+            android:text="Wi-Fi Provisioning Tool"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+
+    <com.renesas.wifi.util.FButton
+        android:id="@+id/btn_ap_provisioning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:minHeight="50dp"
+        android:minWidth="140dp"
+        android:text="Start DA16200/RRQ61000-based"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        fbutton:buttonColor="@color/blue3"
+        fbutton:shadowEnabled="true" />
+
+    <com.renesas.wifi.util.FButton
+        android:id="@+id/btn_ble_provisioning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:minHeight="50dp"
+        android:minWidth="140dp"
+        android:text="Start DA16600-based"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        fbutton:buttonColor="@color/blue3"
+        fbutton:shadowEnabled="true" />
+
+    <com.renesas.wifi.util.FButton
+        android:id="@+id/btn_rrq61400_provisioning"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:minHeight="50dp"
+        android:minWidth="140dp"
+        android:text="Start RRQ61400-based"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        fbutton:buttonColor="@color/blue3"
+        fbutton:shadowEnabled="true" />
+
+</LinearLayout>

@@ -1,0 +1,47 @@
+LICENSES
+
+NAME                                       LICENSE TYPE                     COPYRIGHT                            COMMENTS
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+WiFiProvisioning Android Application       Dialog proprietary               Renesas Electronics                  Licensed under the relevant Dialog SLA
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AndroidAsync                               Apache License 2.0               Koushik Dutta                        https://github.com/koush/AndroidAsync
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+androidx.appcompat                         Apache License 2.0               Google                               https://developer.android.com/jetpack/androidx/releases/appcompat
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+androidx.constraintlayout                  Apache License 2.0               Google                               https://developer.android.com/jetpack/androidx/releases/constraintlayout
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+androidx.legacy                            Apache License 2.0               Google                               https://developer.android.com/jetpack/androidx/releases/legacy
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+com.google.android.material                Apache License 2.0               Google                               https://github.com/material-components/material-components-android
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Apache Commons Text                        Apache License 2.0               The Apache Software Foundation       https://commons.apache.org/proper/commons-text/
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Gson                                       Apache License 2.0               Google                               https://github.com/google/gson
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+material-dialogs                           Apache License 2.0               Aidan Follestad                      https://github.com/afollestad/material-dialogs
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AVLoadingIndicatorView                     Apache License 2.0               jack wang                            https://github.com/81813780/AVLoadingIndicatorView
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Material Design Icons                      Apache License 2.0               Google                               https://github.com/google/material-design-icons
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+AWS SDK for Android                        Apache License 2.0               Amazon Web Services                  https://github.com/aws-amplify/aws-sdk-android
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+MaterialDrawer                             Apache License 2.0               Mike Penz                            https://github.com/mikepenz/MaterialDrawer
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Android-Iconics                            Apache License 2.0               Mike Penz                            https://github.com/mikepenz/Android-Iconics
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Gauge                                      Apache License 2.0               Serge Helfrich                       https://github.com/Pygmalion69/Gauge
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+This software includes both proprietary and open source components. The proprietary components may only be used after execution of the
+relevant Renesas Electronics Licensing Agreement. If you have not executed such an agreement you are not authorised to use this software.
+All open source components constitute a separate delivery and are licensed according to the applicable terms of their respective open source
+licenses. All open source software is delivered “AS IS” with no warranties. While Renesas Electronics seeks to provide complete and
+accurate licensing information with regard to each open source package, Renesas Electronics does not warrant or represent that the
+licensing information is complete or error-free. Certain open source licenses may require that source code is made available under
+certain conditions. Please contact live.kim.wr@renesas.com for any source code requests, as well as for any licensing inquiries
+with respect to the proprietary components.
+
+Version: 1.0
+
+Approved by Legal: Yes

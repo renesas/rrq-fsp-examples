@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ****************************************************************************************
+ *
+ * @file da16200_wifi_list_item.xml
+ *
+ * @brief DA16200 WiFi List Item UI
+ *
+ * Copyright (c) 2023. Renesas Electronics. All rights reserved.
+ *
+ * This software ("Software") is owned by Renesas Electronics.
+ *
+ * By using this Software you agree that Renesas Electronics retains all
+ * intellectual property and proprietary rights in and to this Software and any
+ * use, reproduction, disclosure or distribution of the Software without express
+ * written permission or a license agreement from Renesas Electronics is
+ * strictly prohibited. This Software is solely for use on or in conjunction
+ * with Renesas Electronics products.
+ *
+ * EXCEPT AS OTHERWISE PROVIDED IN A LICENSE AGREEMENT BETWEEN THE PARTIES, THE
+ * SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. EXCEPT AS OTHERWISE
+ * PROVIDED IN A LICENSE AGREEMENT BETWEEN THE PARTIES, IN NO EVENT SHALL
+ * RENESAS ELECTRONICS BE LIABLE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL,
+ * OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+ * USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+ * OF THE SOFTWARE.
+ *
+ ****************************************************************************************
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:weightSum="8">
+
+  <LinearLayout
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:gravity="center_horizontal"
+      android:layout_weight="1.2">
+
+    <ImageView
+        android:id="@+id/iv_signalBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/transparent"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+      <TextView
+          android:id="@+id/tv_level"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/transparent"
+          android:textColor="@color/black"
+          android:textSize="10dp">
+      </TextView>
+
+      <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/transparent"
+          android:textColor="@color/black"
+          android:textSize="10dp"
+          android:text="dBm">
+      </TextView>
+
+    </LinearLayout>
+
+
+  </LinearLayout>
+
+
+  <TextView
+      android:id="@+id/tv_name"
+      android:layout_width="0dp"
+      android:layout_height="wrap_content"
+      android:background="@color/transparent"
+      android:textColor="@color/black"
+      android:textSize="15dp"
+      android:layout_weight="6.8">
+  </TextView>
+
+</LinearLayout>

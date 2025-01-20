@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ ****************************************************************************************
+ *
+ * @file da16200_activity_main.xml
+ *
+ * @brief DA16200 Main UI
+ *
+ * Copyright (c) 2023. Renesas Electronics. All rights reserved.
+ *
+ * This software ("Software") is owned by Renesas Electronics.
+ *
+ * By using this Software you agree that Renesas Electronics retains all
+ * intellectual property and proprietary rights in and to this Software and any
+ * use, reproduction, disclosure or distribution of the Software without express
+ * written permission or a license agreement from Renesas Electronics is
+ * strictly prohibited. This Software is solely for use on or in conjunction
+ * with Renesas Electronics products.
+ *
+ * EXCEPT AS OTHERWISE PROVIDED IN A LICENSE AGREEMENT BETWEEN THE PARTIES, THE
+ * SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. EXCEPT AS OTHERWISE
+ * PROVIDED IN A LICENSE AGREEMENT BETWEEN THE PARTIES, IN NO EVENT SHALL
+ * RENESAS ELECTRONICS BE LIABLE FOR ANY DIRECT, SPECIAL, INDIRECT, INCIDENTAL,
+ * OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF
+ * USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ * TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+ * OF THE SOFTWARE.
+ *
+ ****************************************************************************************
+ -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:weightSum="10">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:background="@color/blue3"
+      android:gravity="center_vertical"
+      android:orientation="horizontal"
+      android:paddingBottom="5dp"
+      android:paddingTop="5dp">
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/transparent"
+        android:padding="10dp"
+        android:src="@drawable/backspace_white_48dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="Wi-Fi device Provisioning"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"/>
+
+
+  </LinearLayout>
+
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="8"
+      android:layout_margin="10dp"
+      android:orientation="vertical"
+      android:padding="10dp">
+
+    <!--<ImageView
+        android:id="@+id/iv_wifi_logo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/outline_wifi_white_48"/>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check before provisioning!"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+      <ImageView
+          android:id="@+id/iv_check0"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/colorTransparent"
+          android:src="@drawable/outline_done_white_24"/>
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="5dp"
+          android:text="Please check if the SDK version is 2.3.4.1 or higher."
+          android:textColor="@color/black"
+          android:textSize="18dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+      <ImageView
+          android:id="@+id/iv_check1"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/colorTransparent"
+          android:src="@drawable/outline_done_white_24"/>
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="5dp"
+          android:text="Be sure Wi-Fi is turned on"
+          android:textColor="@color/black"
+          android:textSize="18dp"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+      <ImageView
+          android:id="@+id/iv_check2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@color/colorTransparent"
+          android:src="@drawable/outline_done_white_24"/>
+
+      <TextView
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="5dp"
+          android:text="Be sure you know the passphrase for the Wi-Fi Access Point or router"
+          android:textColor="@color/black"
+          android:textSize="18sp"/>
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <!--<Button
+      android:id="@+id/btn_begin"
+      style="@style/MyButton"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_gravity="bottom"
+      android:layout_marginBottom="20dp"
+      android:layout_marginEnd="20dp"
+      android:layout_marginLeft="20dp"
+      android:layout_marginRight="20dp"
+      android:layout_marginStart="20dp"
+      android:layout_marginTop="20dp"
+      android:background="@drawable/btn_selector"
+      android:paddingBottom="10dp"
+      android:paddingTop="10dp"
+      android:text="BEGIN"
+      android:textColor="@color/white"/>-->
+  <!--<Button
+      android:id="@+id/btn_start"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="5dp"
+      android:gravity="center"
+      android:paddingStart="60dp"
+      android:paddingEnd="60dp"
+      android:layout_marginBottom="20dp"
+      android:background="@drawable/btn_selector"
+      android:text="I'm ready"
+      android:textSize="20dp"
+      android:textColor="@color/white" />-->
+  <com.renesas.wifi.util.FButton
+      android:id="@+id/btn_start"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:gravity="center"
+      android:layout_margin="20dp"
+      android:padding="20sp"
+      android:layout_gravity="center"
+      android:background="@color/blue3"
+      android:textColor="@android:color/white"
+      android:textSize="20sp"
+      android:textStyle="bold"
+      android:text="I'm ready"
+      fbutton:shadowEnabled="true"/>
+
+</LinearLayout>

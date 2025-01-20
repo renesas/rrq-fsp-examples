@@ -1,0 +1,93 @@
+PODS:
+  - Alamofire (5.6.3)
+  - AWSAuthCore (2.28.4):
+    - AWSCore (= 2.28.4)
+  - AWSCognitoIdentityProvider (2.28.4):
+    - AWSCognitoIdentityProviderASF (= 2.28.4)
+    - AWSCore (= 2.28.4)
+  - AWSCognitoIdentityProviderASF (2.28.4):
+    - AWSCore (= 2.28.4)
+  - AWSCore (2.28.4)
+  - AWSIoT (2.28.4):
+    - AWSCore (= 2.28.4)
+  - AWSMobileClient (2.28.4):
+    - AWSAuthCore (= 2.28.4)
+    - AWSCognitoIdentityProvider (= 2.28.4)
+    - AWSCognitoIdentityProviderASF (= 2.28.4)
+    - AWSCore (= 2.28.4)
+  - AzureIoTHubClient (1.2.3):
+    - AzureIoTuAmqp (= 1.2.3)
+    - AzureIoTuMqtt (= 1.1.3)
+    - AzureIoTUtility (= 1.1.3)
+  - AzureIoTHubServiceClient (1.0.0):
+    - AzureIoTuAmqp (= 1.2.3)
+    - AzureIoTUtility (= 1.1.3)
+  - AzureIoTuAmqp (1.2.3):
+    - AzureIoTUtility (= 1.1.3)
+  - AzureIoTuMqtt (1.1.3):
+    - AzureIoTUtility (= 1.1.3)
+  - AzureIoTUtility (1.1.3)
+  - CocoaAsyncSocket (7.6.5)
+  - DLRadioButton (1.4.12)
+  - MBProgressHUD (1.2.0)
+  - Pastel (0.6.0)
+  - SideMenu (6.5.0)
+  - SwiftyJSON (5.0.1)
+
+DEPENDENCIES:
+  - Alamofire (~> 5.2)
+  - AWSIoT
+  - AWSMobileClient
+  - AzureIoTHubClient
+  - AzureIoTHubServiceClient
+  - CocoaAsyncSocket
+  - DLRadioButton
+  - MBProgressHUD
+  - Pastel
+  - SideMenu
+  - SwiftyJSON (~> 5.0.0)
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSIoT
+    - AWSMobileClient
+    - AzureIoTHubClient
+    - AzureIoTHubServiceClient
+    - AzureIoTuAmqp
+    - AzureIoTuMqtt
+    - AzureIoTUtility
+    - CocoaAsyncSocket
+    - DLRadioButton
+    - MBProgressHUD
+    - Pastel
+    - SideMenu
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: 8b7a946e9db6f76e93eaa0d4c84e3751633959c9
+  AWSAuthCore: 5a46a49cce866d1d1447cfca98b58fa17da5c5ba
+  AWSCognitoIdentityProvider: 3ec170b2799de91b2535c09e521d47562dd572aa
+  AWSCognitoIdentityProviderASF: 7f4ec9b22ef3490e373507a22eb0001b99e3daf3
+  AWSCore: 4f8c2d79f9071c80e4c5211672db389334370eae
+  AWSIoT: e0d00105eb210d98f91c7070bf29ca7807f23176
+  AWSMobileClient: 3e824e550db1360f492a9aefd20ce710d426117e
+  AzureIoTHubClient: 53a205cbd4ce9556cdea11bfa7609f989fe5714a
+  AzureIoTHubServiceClient: 559676d5c456e73b8d3241c3d1916e34783e0037
+  AzureIoTuAmqp: c8193b7f672bf9210170aabe0f2f8cc763c34dc9
+  AzureIoTuMqtt: 45b8c12e2fa0868e68cd45b79a1821d645b7cdb3
+  AzureIoTUtility: b1d5354a4175a90c56f87c72c7dbeb75f4d2dadf
+  CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
+  DLRadioButton: d7c4e225ed0e8013cef7be61455230c7557ad7c1
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SwiftyJSON: 2f33a42c6fbc52764d96f13368585094bfd8aa5e
+
+PODFILE CHECKSUM: 8e553b285c658770eda001c0bdf86b156fee500a
+
+COCOAPODS: 1.11.3

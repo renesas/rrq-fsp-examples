@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string-array name="sleepMode_array">
+        <item> Sleep mode 1 </item>
+        <item> Sleep mode 2 </item>
+        <item> Sleep mode 3 </item>
+    </string-array>
+
+    <string-array name="rtc_default_array">
+        <item> No </item>
+        <item> Yes </item>
+    </string-array>
+
+    <string-array name="dpm_use_array">
+        <item> No </item>
+        <item> Yes </item>
+    </string-array>
+
+    <string-array name="dpm_default_array">
+        <item> No </item>
+        <item> Yes </item>
+    </string-array>
+
+
+</resources>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LCp-0s-TMO">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="a7h-1V-ogc">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="LCp-0s-TMO" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dSR-nb-LTr"/>
+                        <viewControllerLayoutGuide type="bottom" id="8rT-bg-1iT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Pb7-Is-Dou">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash" translatesAutoresizingMaskIntoConstraints="NO" id="u8S-oI-ed2">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="loader_line" translatesAutoresizingMaskIntoConstraints="NO" id="BsU-Vm-0bN">
+                                <rect key="frame" x="37" y="563" width="301" height="5"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="renesas_white" translatesAutoresizingMaskIntoConstraints="NO" id="mbg-Tl-DdS">
+                                <rect key="frame" x="37.666666666666657" y="618" width="300" height="100"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Lyw-Cx-t4F">
+                                <rect key="frame" x="112.66666666666669" y="165" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="3zF-uL-5Qw"/>
+                                    <constraint firstAttribute="height" constant="150" id="GmC-G3-dDp"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_text1.png" translatesAutoresizingMaskIntoConstraints="NO" id="6hm-2i-Knc" userLabel="splash_text1.png">
+                                <rect key="frame" x="22.666666666666657" y="375" width="330" height="62"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="330" id="EhF-4f-ygR"/>
+                                    <constraint firstAttribute="width" secondItem="6hm-2i-Knc" secondAttribute="height" multiplier="925:174" id="FlY-Vi-bvf"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="outline_wifi_white_48.png" translatesAutoresizingMaskIntoConstraints="NO" id="set-CG-IBj">
+                                <rect key="frame" x="225" y="124" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="FI3-qr-eih"/>
+                                    <constraint firstAttribute="height" constant="100" id="u1l-Du-SsG"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yhl-dB-7wM"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6hm-2i-Knc" firstAttribute="top" secondItem="Lyw-Cx-t4F" secondAttribute="bottom" constant="60" id="7ts-wA-mdD"/>
+                            <constraint firstItem="mbg-Tl-DdS" firstAttribute="centerX" secondItem="Pb7-Is-Dou" secondAttribute="centerX" id="8cX-cQ-3px"/>
+                            <constraint firstItem="BsU-Vm-0bN" firstAttribute="centerX" secondItem="Pb7-Is-Dou" secondAttribute="centerX" id="KpA-L5-CnJ"/>
+                            <constraint firstAttribute="bottom" secondItem="u8S-oI-ed2" secondAttribute="bottom" id="Rya-qE-N6j"/>
+                            <constraint firstItem="u8S-oI-ed2" firstAttribute="leading" secondItem="Pb7-Is-Dou" secondAttribute="leading" id="SI3-KR-3SV"/>
+                            <constraint firstItem="Lyw-Cx-t4F" firstAttribute="top" secondItem="set-CG-IBj" secondAttribute="bottom" constant="-59" id="Yp1-Er-oGK"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6hm-2i-Knc" secondAttribute="trailing" constant="20" id="bBo-id-Qda"/>
+                            <constraint firstItem="6hm-2i-Knc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Pb7-Is-Dou" secondAttribute="leading" constant="20" id="bQc-gL-dAR"/>
+                            <constraint firstItem="mbg-Tl-DdS" firstAttribute="top" secondItem="BsU-Vm-0bN" secondAttribute="bottom" constant="50" id="caz-Af-SxQ"/>
+                            <constraint firstItem="set-CG-IBj" firstAttribute="leading" secondItem="Lyw-Cx-t4F" secondAttribute="trailing" constant="-37.666666666666686" id="cld-EV-oj2"/>
+                            <constraint firstItem="6hm-2i-Knc" firstAttribute="centerY" secondItem="Pb7-Is-Dou" secondAttribute="centerY" id="gej-yM-y0e"/>
+                            <constraint firstItem="Lyw-Cx-t4F" firstAttribute="centerX" secondItem="Pb7-Is-Dou" secondAttribute="centerX" id="kaT-5d-x53"/>
+                            <constraint firstItem="8rT-bg-1iT" firstAttribute="top" secondItem="mbg-Tl-DdS" secondAttribute="bottom" constant="60" id="kdi-xZ-UK3"/>
+                            <constraint firstAttribute="trailing" secondItem="u8S-oI-ed2" secondAttribute="trailing" id="qKw-T2-P8I"/>
+                            <constraint firstItem="6hm-2i-Knc" firstAttribute="centerX" secondItem="Pb7-Is-Dou" secondAttribute="centerX" id="t17-qm-eGY"/>
+                            <constraint firstItem="u8S-oI-ed2" firstAttribute="top" secondItem="Pb7-Is-Dou" secondAttribute="top" id="wdA-vu-Wzp"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VUM-0x-Fwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="24.637681159420293" y="354.61956521739131"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Splash" width="375" height="667"/>
+        <image name="loader_line" width="301" height="5"/>
+        <image name="outline_wifi_white_48.png" width="192" height="192"/>
+        <image name="renesas_white" width="300" height="100"/>
+        <image name="splash-icon" width="150" height="150"/>
+        <image name="splash_text1.png" width="925" height="174"/>
+    </resources>
+</document>

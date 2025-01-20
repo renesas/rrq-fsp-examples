@@ -1,0 +1,742 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8F975596FD65685A26ED1307 /* Pods_WiFiProvisioning.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AF3798CC9374C0D75973694 /* Pods_WiFiProvisioning.framework */; };
+		EF01AE0D2601A62700B578E1 /* DA16600NetworkListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF01AE0C2601A62700B578E1 /* DA16600NetworkListCell.swift */; };
+		EF059A412668BA2A00BBE824 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = EF059A402668BA2A00BBE824 /* awsconfiguration.json */; };
+		EF2045DF266872BE00EE71CF /* AWSIoTSensorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2045DE266872BE00EE71CF /* AWSIoTSensorViewController.swift */; };
+		EF2045E126687A0500EE71CF /* AWSIoTDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2045E026687A0500EE71CF /* AWSIoTDeviceViewController.swift */; };
+		EF26FB8925A7E83200033DC2 /* ConnectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF26FB8825A7E83200033DC2 /* ConnectDeviceViewController.swift */; };
+		EF26FB8C25A7F9C800033DC2 /* DA16200MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF26FB8B25A7F9C800033DC2 /* DA16200MainViewController.swift */; };
+		EF26FBAD25AB0D5000033DC2 /* NetworkListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF26FBAC25AB0D5000033DC2 /* NetworkListCell.swift */; };
+		EF337F5B25916EE300955AC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF337F5A25916EE300955AC3 /* AppDelegate.swift */; };
+		EF337F5D25916EE300955AC3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF337F5C25916EE300955AC3 /* SceneDelegate.swift */; };
+		EF337F5F25916EE300955AC3 /* SelectNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF337F5E25916EE300955AC3 /* SelectNetworkViewController.swift */; };
+		EF337F6225916EE300955AC3 /* First.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF337F6025916EE300955AC3 /* First.storyboard */; };
+		EF337F6425916EE300955AC3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF337F6325916EE300955AC3 /* Assets.xcassets */; };
+		EF337F6725916EE300955AC3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF337F6525916EE300955AC3 /* LaunchScreen.storyboard */; };
+		EF337FA42592D56B00955AC3 /* OpensourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF337FA32592D56B00955AC3 /* OpensourceViewController.swift */; };
+		EF337FA72592D75300955AC3 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF337FA62592D75300955AC3 /* SideMenuViewController.swift */; };
+		EF337FAA2592D79600955AC3 /* MySideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF337FA92592D79600955AC3 /* MySideMenuNavigationController.swift */; };
+		EF3FAFD726954D440059B663 /* AddHiddenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FAFD626954D440059B663 /* AddHiddenViewController.swift */; };
+		EF3FAFD92697078B0059B663 /* DA16200AddHiddenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3FAFD82697078B0059B663 /* DA16200AddHiddenViewController.swift */; };
+		EF43288E25E888AD00C90DD8 /* PeripheralConnectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288525E888AD00C90DD8 /* PeripheralConnectedViewController.swift */; };
+		EF43288F25E888AD00C90DD8 /* UIColor+BTColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288625E888AD00C90DD8 /* UIColor+BTColors.swift */; };
+		EF43289025E888AD00C90DD8 /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288725E888AD00C90DD8 /* PeripheralViewController.swift */; };
+		EF43289125E888AD00C90DD8 /* ConnectingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288825E888AD00C90DD8 /* ConnectingViewController.swift */; };
+		EF43289225E888AD00C90DD8 /* CBPeripheral+Name.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288925E888AD00C90DD8 /* CBPeripheral+Name.swift */; };
+		EF43289325E888AD00C90DD8 /* UIAlertController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288A25E888AD00C90DD8 /* UIAlertController+Utility.swift */; };
+		EF43289425E888AD00C90DD8 /* UIButton+Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288B25E888AD00C90DD8 /* UIButton+Style.swift */; };
+		EF43289525E888AD00C90DD8 /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF43288C25E888AD00C90DD8 /* DeviceTableViewCell.swift */; };
+		EF441A4B25AD453C003F868E /* signal_wifi_2_bar_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4225AD453C003F868E /* signal_wifi_2_bar_lock.png */; };
+		EF441A4C25AD453C003F868E /* signal_wifi_1_bar_open.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4325AD453C003F868E /* signal_wifi_1_bar_open.png */; };
+		EF441A4D25AD453C003F868E /* signal_wifi_4_bar_open.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4425AD453C003F868E /* signal_wifi_4_bar_open.png */; };
+		EF441A4E25AD453C003F868E /* signal_wifi_4_bar_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4525AD453C003F868E /* signal_wifi_4_bar_lock.png */; };
+		EF441A4F25AD453C003F868E /* signal_wifi_0_bar_open.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4625AD453C003F868E /* signal_wifi_0_bar_open.png */; };
+		EF441A5025AD453C003F868E /* signal_wifi_3_bar_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4725AD453C003F868E /* signal_wifi_3_bar_lock.png */; };
+		EF441A5125AD453C003F868E /* signal_wifi_3_bar_open.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4825AD453C003F868E /* signal_wifi_3_bar_open.png */; };
+		EF441A5225AD453C003F868E /* signal_wifi_2_bar_open.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4925AD453C003F868E /* signal_wifi_2_bar_open.png */; };
+		EF441A5325AD453C003F868E /* signal_wifi_1_bar_lock.png in Resources */ = {isa = PBXBuildFile; fileRef = EF441A4A25AD453C003F868E /* signal_wifi_1_bar_lock.png */; };
+		EF441A6B25B16F73003F868E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF441A6A25B16F73003F868E /* MainViewController.swift */; };
+		EF6CDABD25ABD15000CD3D95 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6CDABC25ABD15000CD3D95 /* Utility.swift */; };
+		EF6E7BEC25C12075000EA1AB /* baseline_lock_red.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6E7BEA25C12074000EA1AB /* baseline_lock_red.png */; };
+		EF6E7BED25C12075000EA1AB /* baseline_lock_green.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6E7BEB25C12074000EA1AB /* baseline_lock_green.png */; };
+		EF774B8F266E50DA00F63622 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF774B8E266E50DA00F63622 /* Config.swift */; };
+		EF7A68F52A73CD3F00C92D42 /* LocalNetworkPermissionChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF7A68F42A73CD3E00C92D42 /* LocalNetworkPermissionChecker.swift */; };
+		EF82837225999DE400C5126E /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF337FB725932C9600955AC3 /* NetworkExtension.framework */; };
+		EF8283AA2599CFA700C5126E /* DeviceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8283A92599CFA700C5126E /* DeviceConfig.swift */; };
+		EF8283AD2599CFC800C5126E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8283AC2599CFC800C5126E /* ViewController.swift */; };
+		EF8885492669A73400CE2F06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF8885482669A73400CE2F06 /* Constants.swift */; };
+		EF95CB802599D82300813E55 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF95CB7F2599D82300813E55 /* Main.storyboard */; };
+		EFBB789A27BC836800CEFA75 /* OSLog.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF67CDF027BC82CC00A839F1 /* OSLog.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EFDEFD3C271FF0CD003D3699 /* AzureIoTDoorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDEFD3B271FF0CD003D3699 /* AzureIoTDoorViewController.swift */; };
+		EFE0ADA925E34E0C00B4C3FE /* outline_wifi_white_48.png in Resources */ = {isa = PBXBuildFile; fileRef = EFE0ADA825E34E0C00B4C3FE /* outline_wifi_white_48.png */; };
+		EFE0ADC925E5D93000B4C3FE /* DA16600MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFE0ADC825E5D93000B4C3FE /* DA16600MainViewController.swift */; };
+		EFE0ADF325E60C7C00B4C3FE /* splash_text1.png in Resources */ = {isa = PBXBuildFile; fileRef = EFE0ADF225E60C7C00B4C3FE /* splash_text1.png */; };
+		EFF902202D2DEB2100A0C8D2 /* SetEnterpriseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF9021F2D2DEB2100A0C8D2 /* SetEnterpriseViewController.swift */; };
+		EFFB4E742667798C00A15BDD /* AWSIoTDoorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFB4E732667798C00A15BDD /* AWSIoTDoorViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6AF3798CC9374C0D75973694 /* Pods_WiFiProvisioning.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WiFiProvisioning.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D377A62DF751F6545D975EF0 /* Pods-WiFiProvisioning.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiFiProvisioning.debug.xcconfig"; path = "Target Support Files/Pods-WiFiProvisioning/Pods-WiFiProvisioning.debug.xcconfig"; sourceTree = "<group>"; };
+		E6E59B4EE694530C88A43C89 /* Pods-WiFiProvisioning.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WiFiProvisioning.release.xcconfig"; path = "Target Support Files/Pods-WiFiProvisioning/Pods-WiFiProvisioning.release.xcconfig"; sourceTree = "<group>"; };
+		EF01AE0C2601A62700B578E1 /* DA16600NetworkListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DA16600NetworkListCell.swift; sourceTree = "<group>"; };
+		EF059A402668BA2A00BBE824 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
+		EF193EB62669D28E003D6999 /* AWSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF193EB82669D294003D6999 /* AWSIoT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSIoT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF193EBA2669D29A003D6999 /* AWSMobileClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSMobileClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF193EBC2669D2BA003D6999 /* AWSAuthCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSAuthCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF193EBE2669D2C1003D6999 /* AWSCognitoIdentityProvider.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSCognitoIdentityProvider.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF193EC02669D2C4003D6999 /* AWSCognitoIdentityProviderASF.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSCognitoIdentityProviderASF.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF2045DE266872BE00EE71CF /* AWSIoTSensorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSIoTSensorViewController.swift; sourceTree = "<group>"; };
+		EF2045E026687A0500EE71CF /* AWSIoTDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSIoTDeviceViewController.swift; sourceTree = "<group>"; };
+		EF26FB8825A7E83200033DC2 /* ConnectDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectDeviceViewController.swift; sourceTree = "<group>"; };
+		EF26FB8B25A7F9C800033DC2 /* DA16200MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DA16200MainViewController.swift; sourceTree = "<group>"; };
+		EF26FBAC25AB0D5000033DC2 /* NetworkListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkListCell.swift; sourceTree = "<group>"; };
+		EF337F5725916EE300955AC3 /* WiFiProvisioning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WiFiProvisioning.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF337F5A25916EE300955AC3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EF337F5C25916EE300955AC3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		EF337F5E25916EE300955AC3 /* SelectNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectNetworkViewController.swift; sourceTree = "<group>"; };
+		EF337F6125916EE300955AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/First.storyboard; sourceTree = "<group>"; };
+		EF337F6325916EE300955AC3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF337F6625916EE300955AC3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EF337F6825916EE300955AC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF337FA32592D56B00955AC3 /* OpensourceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpensourceViewController.swift; sourceTree = "<group>"; };
+		EF337FA62592D75300955AC3 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
+		EF337FA92592D79600955AC3 /* MySideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySideMenuNavigationController.swift; sourceTree = "<group>"; };
+		EF337FAC2593012B00955AC3 /* WiFiProvisioning.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFiProvisioning.entitlements; sourceTree = "<group>"; };
+		EF337FB725932C9600955AC3 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		EF3730C22669DA7200758FFF /* AWSCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AWSCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF3ED9CD2886A57500CC1E6C /* WiFiProvisioningRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WiFiProvisioningRelease.entitlements; sourceTree = "<group>"; };
+		EF3FAFD626954D440059B663 /* AddHiddenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHiddenViewController.swift; sourceTree = "<group>"; };
+		EF3FAFD82697078B0059B663 /* DA16200AddHiddenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DA16200AddHiddenViewController.swift; sourceTree = "<group>"; };
+		EF43288525E888AD00C90DD8 /* PeripheralConnectedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralConnectedViewController.swift; sourceTree = "<group>"; };
+		EF43288625E888AD00C90DD8 /* UIColor+BTColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+BTColors.swift"; sourceTree = "<group>"; };
+		EF43288725E888AD00C90DD8 /* PeripheralViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
+		EF43288825E888AD00C90DD8 /* ConnectingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectingViewController.swift; sourceTree = "<group>"; };
+		EF43288925E888AD00C90DD8 /* CBPeripheral+Name.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CBPeripheral+Name.swift"; sourceTree = "<group>"; };
+		EF43288A25E888AD00C90DD8 /* UIAlertController+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Utility.swift"; sourceTree = "<group>"; };
+		EF43288B25E888AD00C90DD8 /* UIButton+Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Style.swift"; sourceTree = "<group>"; };
+		EF43288C25E888AD00C90DD8 /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
+		EF441A4225AD453C003F868E /* signal_wifi_2_bar_lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_2_bar_lock.png; sourceTree = "<group>"; };
+		EF441A4325AD453C003F868E /* signal_wifi_1_bar_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_1_bar_open.png; sourceTree = "<group>"; };
+		EF441A4425AD453C003F868E /* signal_wifi_4_bar_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_4_bar_open.png; sourceTree = "<group>"; };
+		EF441A4525AD453C003F868E /* signal_wifi_4_bar_lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_4_bar_lock.png; sourceTree = "<group>"; };
+		EF441A4625AD453C003F868E /* signal_wifi_0_bar_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_0_bar_open.png; sourceTree = "<group>"; };
+		EF441A4725AD453C003F868E /* signal_wifi_3_bar_lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_3_bar_lock.png; sourceTree = "<group>"; };
+		EF441A4825AD453C003F868E /* signal_wifi_3_bar_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_3_bar_open.png; sourceTree = "<group>"; };
+		EF441A4925AD453C003F868E /* signal_wifi_2_bar_open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_2_bar_open.png; sourceTree = "<group>"; };
+		EF441A4A25AD453C003F868E /* signal_wifi_1_bar_lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = signal_wifi_1_bar_lock.png; sourceTree = "<group>"; };
+		EF441A6A25B16F73003F868E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		EF67CDF027BC82CC00A839F1 /* OSLog.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OSLog.framework; path = System/Library/Frameworks/OSLog.framework; sourceTree = SDKROOT; };
+		EF6CDABC25ABD15000CD3D95 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		EF6E7BEA25C12074000EA1AB /* baseline_lock_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_lock_red.png; sourceTree = "<group>"; };
+		EF6E7BEB25C12074000EA1AB /* baseline_lock_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseline_lock_green.png; sourceTree = "<group>"; };
+		EF774B8E266E50DA00F63622 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		EF7A68F42A73CD3E00C92D42 /* LocalNetworkPermissionChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetworkPermissionChecker.swift; sourceTree = "<group>"; };
+		EF8283A92599CFA700C5126E /* DeviceConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceConfig.swift; sourceTree = "<group>"; };
+		EF8283AC2599CFC800C5126E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EF8885482669A73400CE2F06 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		EF95CB7F2599D82300813E55 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		EFDEFD3B271FF0CD003D3699 /* AzureIoTDoorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureIoTDoorViewController.swift; sourceTree = "<group>"; };
+		EFE0ADA825E34E0C00B4C3FE /* outline_wifi_white_48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = outline_wifi_white_48.png; sourceTree = "<group>"; };
+		EFE0ADC825E5D93000B4C3FE /* DA16600MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DA16600MainViewController.swift; sourceTree = "<group>"; };
+		EFE0ADF225E60C7C00B4C3FE /* splash_text1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash_text1.png; sourceTree = "<group>"; };
+		EFF9021F2D2DEB2100A0C8D2 /* SetEnterpriseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetEnterpriseViewController.swift; sourceTree = "<group>"; };
+		EFFB4E732667798C00A15BDD /* AWSIoTDoorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWSIoTDoorViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF337F5425916EE300955AC3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFBB789A27BC836800CEFA75 /* OSLog.framework in Frameworks */,
+				EF82837225999DE400C5126E /* NetworkExtension.framework in Frameworks */,
+				8F975596FD65685A26ED1307 /* Pods_WiFiProvisioning.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1207CCAFDD0564C560300BB4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D377A62DF751F6545D975EF0 /* Pods-WiFiProvisioning.debug.xcconfig */,
+				E6E59B4EE694530C88A43C89 /* Pods-WiFiProvisioning.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		9AFDE77927B258C4452F835C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF67CDF027BC82CC00A839F1 /* OSLog.framework */,
+				EF3730C22669DA7200758FFF /* AWSCore.framework */,
+				EF193EC02669D2C4003D6999 /* AWSCognitoIdentityProviderASF.framework */,
+				EF193EBE2669D2C1003D6999 /* AWSCognitoIdentityProvider.framework */,
+				EF193EBC2669D2BA003D6999 /* AWSAuthCore.framework */,
+				EF193EBA2669D29A003D6999 /* AWSMobileClient.framework */,
+				EF193EB82669D294003D6999 /* AWSIoT.framework */,
+				EF193EB62669D28E003D6999 /* AWSCore.framework */,
+				EF337FB725932C9600955AC3 /* NetworkExtension.framework */,
+				6AF3798CC9374C0D75973694 /* Pods_WiFiProvisioning.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF337F4E25916EE300955AC3 = {
+			isa = PBXGroup;
+			children = (
+				EF337F5925916EE300955AC3 /* WiFiProvisioning */,
+				EF337F5825916EE300955AC3 /* Products */,
+				1207CCAFDD0564C560300BB4 /* Pods */,
+				9AFDE77927B258C4452F835C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		EF337F5825916EE300955AC3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF337F5725916EE300955AC3 /* WiFiProvisioning.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF337F5925916EE300955AC3 /* WiFiProvisioning */ = {
+			isa = PBXGroup;
+			children = (
+				EF3ED9CD2886A57500CC1E6C /* WiFiProvisioningRelease.entitlements */,
+				EF337FAC2593012B00955AC3 /* WiFiProvisioning.entitlements */,
+				EF337F6F25916F3300955AC3 /* assets */,
+				EF337F802591850600955AC3 /* SplashView */,
+				EF441A8325B5063D003F868E /* DA16200 */,
+				EFE0ADC725E5D8E700B4C3FE /* DA16600 */,
+				EFFB4E722667796400A15BDD /* AWSIoT */,
+				EFDEFD3A271FF06A003D3699 /* AzureIoT */,
+				EF441A8725B50C96003F868E /* SideMenu */,
+				EF337F5A25916EE300955AC3 /* AppDelegate.swift */,
+				EF059A402668BA2A00BBE824 /* awsconfiguration.json */,
+				EF8885482669A73400CE2F06 /* Constants.swift */,
+				EF337F5C25916EE300955AC3 /* SceneDelegate.swift */,
+				EF441A6A25B16F73003F868E /* MainViewController.swift */,
+				EF6CDABC25ABD15000CD3D95 /* Utility.swift */,
+				EF8283A92599CFA700C5126E /* DeviceConfig.swift */,
+				EF337F6025916EE300955AC3 /* First.storyboard */,
+				EF337F6525916EE300955AC3 /* LaunchScreen.storyboard */,
+				EF337F6825916EE300955AC3 /* Info.plist */,
+			);
+			path = WiFiProvisioning;
+			sourceTree = "<group>";
+		};
+		EF337F6F25916F3300955AC3 /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				EFE0ADA825E34E0C00B4C3FE /* outline_wifi_white_48.png */,
+				EF441A4625AD453C003F868E /* signal_wifi_0_bar_open.png */,
+				EF441A4A25AD453C003F868E /* signal_wifi_1_bar_lock.png */,
+				EF441A4325AD453C003F868E /* signal_wifi_1_bar_open.png */,
+				EF441A4225AD453C003F868E /* signal_wifi_2_bar_lock.png */,
+				EF441A4925AD453C003F868E /* signal_wifi_2_bar_open.png */,
+				EF441A4725AD453C003F868E /* signal_wifi_3_bar_lock.png */,
+				EF441A4825AD453C003F868E /* signal_wifi_3_bar_open.png */,
+				EF441A4525AD453C003F868E /* signal_wifi_4_bar_lock.png */,
+				EF441A4425AD453C003F868E /* signal_wifi_4_bar_open.png */,
+				EF6E7BEB25C12074000EA1AB /* baseline_lock_green.png */,
+				EF6E7BEA25C12074000EA1AB /* baseline_lock_red.png */,
+				EFE0ADF225E60C7C00B4C3FE /* splash_text1.png */,
+				EF337F6325916EE300955AC3 /* Assets.xcassets */,
+			);
+			path = assets;
+			sourceTree = "<group>";
+		};
+		EF337F802591850600955AC3 /* SplashView */ = {
+			isa = PBXGroup;
+			children = (
+				EF8283AC2599CFC800C5126E /* ViewController.swift */,
+				EF95CB7F2599D82300813E55 /* Main.storyboard */,
+			);
+			path = SplashView;
+			sourceTree = "<group>";
+		};
+		EF441A8325B5063D003F868E /* DA16200 */ = {
+			isa = PBXGroup;
+			children = (
+				EFF9021F2D2DEB2100A0C8D2 /* SetEnterpriseViewController.swift */,
+				EF26FB8B25A7F9C800033DC2 /* DA16200MainViewController.swift */,
+				EF26FB8825A7E83200033DC2 /* ConnectDeviceViewController.swift */,
+				EF337F5E25916EE300955AC3 /* SelectNetworkViewController.swift */,
+				EF26FBAC25AB0D5000033DC2 /* NetworkListCell.swift */,
+				EF3FAFD82697078B0059B663 /* DA16200AddHiddenViewController.swift */,
+				EF7A68F42A73CD3E00C92D42 /* LocalNetworkPermissionChecker.swift */,
+			);
+			path = DA16200;
+			sourceTree = "<group>";
+		};
+		EF441A8725B50C96003F868E /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				EF337FA32592D56B00955AC3 /* OpensourceViewController.swift */,
+				EF337FA62592D75300955AC3 /* SideMenuViewController.swift */,
+				EF337FA92592D79600955AC3 /* MySideMenuNavigationController.swift */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		EFDEFD3A271FF06A003D3699 /* AzureIoT */ = {
+			isa = PBXGroup;
+			children = (
+				EFDEFD3B271FF0CD003D3699 /* AzureIoTDoorViewController.swift */,
+			);
+			path = AzureIoT;
+			sourceTree = "<group>";
+		};
+		EFE0ADC725E5D8E700B4C3FE /* DA16600 */ = {
+			isa = PBXGroup;
+			children = (
+				EF43288925E888AD00C90DD8 /* CBPeripheral+Name.swift */,
+				EF43288825E888AD00C90DD8 /* ConnectingViewController.swift */,
+				EF43288C25E888AD00C90DD8 /* DeviceTableViewCell.swift */,
+				EF43288525E888AD00C90DD8 /* PeripheralConnectedViewController.swift */,
+				EF01AE0C2601A62700B578E1 /* DA16600NetworkListCell.swift */,
+				EF43288725E888AD00C90DD8 /* PeripheralViewController.swift */,
+				EF43288A25E888AD00C90DD8 /* UIAlertController+Utility.swift */,
+				EF43288B25E888AD00C90DD8 /* UIButton+Style.swift */,
+				EF43288625E888AD00C90DD8 /* UIColor+BTColors.swift */,
+				EFE0ADC825E5D93000B4C3FE /* DA16600MainViewController.swift */,
+				EF3FAFD626954D440059B663 /* AddHiddenViewController.swift */,
+			);
+			path = DA16600;
+			sourceTree = "<group>";
+		};
+		EFFB4E722667796400A15BDD /* AWSIoT */ = {
+			isa = PBXGroup;
+			children = (
+				EFFB4E732667798C00A15BDD /* AWSIoTDoorViewController.swift */,
+				EF2045DE266872BE00EE71CF /* AWSIoTSensorViewController.swift */,
+				EF2045E026687A0500EE71CF /* AWSIoTDeviceViewController.swift */,
+				EF774B8E266E50DA00F63622 /* Config.swift */,
+			);
+			path = AWSIoT;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF337F5625916EE300955AC3 /* WiFiProvisioning */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF337F6B25916EE300955AC3 /* Build configuration list for PBXNativeTarget "WiFiProvisioning" */;
+			buildPhases = (
+				1FCAA92D886572476502316C /* [CP] Check Pods Manifest.lock */,
+				EF337F5325916EE300955AC3 /* Sources */,
+				EF337F5425916EE300955AC3 /* Frameworks */,
+				EF337F5525916EE300955AC3 /* Resources */,
+				47B0867231F4F72F24B83496 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WiFiProvisioning;
+			productName = DialogProvisioning;
+			productReference = EF337F5725916EE300955AC3 /* WiFiProvisioning.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF337F4F25916EE300955AC3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					EF337F5625916EE300955AC3 = {
+						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1310;
+					};
+				};
+			};
+			buildConfigurationList = EF337F5225916EE300955AC3 /* Build configuration list for PBXProject "WiFiProvisioning" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF337F4E25916EE300955AC3;
+			productRefGroup = EF337F5825916EE300955AC3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF337F5625916EE300955AC3 /* WiFiProvisioning */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF337F5525916EE300955AC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF059A412668BA2A00BBE824 /* awsconfiguration.json in Resources */,
+				EF441A4E25AD453C003F868E /* signal_wifi_4_bar_lock.png in Resources */,
+				EF95CB802599D82300813E55 /* Main.storyboard in Resources */,
+				EF337F6725916EE300955AC3 /* LaunchScreen.storyboard in Resources */,
+				EFE0ADA925E34E0C00B4C3FE /* outline_wifi_white_48.png in Resources */,
+				EF441A5325AD453C003F868E /* signal_wifi_1_bar_lock.png in Resources */,
+				EF337F6425916EE300955AC3 /* Assets.xcassets in Resources */,
+				EF441A5125AD453C003F868E /* signal_wifi_3_bar_open.png in Resources */,
+				EF441A4D25AD453C003F868E /* signal_wifi_4_bar_open.png in Resources */,
+				EF6E7BEC25C12075000EA1AB /* baseline_lock_red.png in Resources */,
+				EF441A4B25AD453C003F868E /* signal_wifi_2_bar_lock.png in Resources */,
+				EF441A5025AD453C003F868E /* signal_wifi_3_bar_lock.png in Resources */,
+				EF441A4F25AD453C003F868E /* signal_wifi_0_bar_open.png in Resources */,
+				EF441A5225AD453C003F868E /* signal_wifi_2_bar_open.png in Resources */,
+				EF6E7BED25C12075000EA1AB /* baseline_lock_green.png in Resources */,
+				EF337F6225916EE300955AC3 /* First.storyboard in Resources */,
+				EF441A4C25AD453C003F868E /* signal_wifi_1_bar_open.png in Resources */,
+				EFE0ADF325E60C7C00B4C3FE /* splash_text1.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1FCAA92D886572476502316C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-WiFiProvisioning-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47B0867231F4F72F24B83496 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WiFiProvisioning/Pods-WiFiProvisioning-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-WiFiProvisioning/Pods-WiFiProvisioning-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-WiFiProvisioning/Pods-WiFiProvisioning-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF337F5325916EE300955AC3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF2045DF266872BE00EE71CF /* AWSIoTSensorViewController.swift in Sources */,
+				EF43289525E888AD00C90DD8 /* DeviceTableViewCell.swift in Sources */,
+				EF43289025E888AD00C90DD8 /* PeripheralViewController.swift in Sources */,
+				EF43289325E888AD00C90DD8 /* UIAlertController+Utility.swift in Sources */,
+				EF2045E126687A0500EE71CF /* AWSIoTDeviceViewController.swift in Sources */,
+				EF337FA72592D75300955AC3 /* SideMenuViewController.swift in Sources */,
+				EF43288F25E888AD00C90DD8 /* UIColor+BTColors.swift in Sources */,
+				EF337FA42592D56B00955AC3 /* OpensourceViewController.swift in Sources */,
+				EF43289125E888AD00C90DD8 /* ConnectingViewController.swift in Sources */,
+				EF8283AD2599CFC800C5126E /* ViewController.swift in Sources */,
+				EF8283AA2599CFA700C5126E /* DeviceConfig.swift in Sources */,
+				EF01AE0D2601A62700B578E1 /* DA16600NetworkListCell.swift in Sources */,
+				EF337F5F25916EE300955AC3 /* SelectNetworkViewController.swift in Sources */,
+				EF26FB8C25A7F9C800033DC2 /* DA16200MainViewController.swift in Sources */,
+				EF337FAA2592D79600955AC3 /* MySideMenuNavigationController.swift in Sources */,
+				EF6CDABD25ABD15000CD3D95 /* Utility.swift in Sources */,
+				EFDEFD3C271FF0CD003D3699 /* AzureIoTDoorViewController.swift in Sources */,
+				EF441A6B25B16F73003F868E /* MainViewController.swift in Sources */,
+				EF774B8F266E50DA00F63622 /* Config.swift in Sources */,
+				EF337F5B25916EE300955AC3 /* AppDelegate.swift in Sources */,
+				EFF902202D2DEB2100A0C8D2 /* SetEnterpriseViewController.swift in Sources */,
+				EF26FB8925A7E83200033DC2 /* ConnectDeviceViewController.swift in Sources */,
+				EF337F5D25916EE300955AC3 /* SceneDelegate.swift in Sources */,
+				EFE0ADC925E5D93000B4C3FE /* DA16600MainViewController.swift in Sources */,
+				EFFB4E742667798C00A15BDD /* AWSIoTDoorViewController.swift in Sources */,
+				EF3FAFD92697078B0059B663 /* DA16200AddHiddenViewController.swift in Sources */,
+				EF7A68F52A73CD3F00C92D42 /* LocalNetworkPermissionChecker.swift in Sources */,
+				EF43289225E888AD00C90DD8 /* CBPeripheral+Name.swift in Sources */,
+				EF43289425E888AD00C90DD8 /* UIButton+Style.swift in Sources */,
+				EF43288E25E888AD00C90DD8 /* PeripheralConnectedViewController.swift in Sources */,
+				EF3FAFD726954D440059B663 /* AddHiddenViewController.swift in Sources */,
+				EF26FBAD25AB0D5000033DC2 /* NetworkListCell.swift in Sources */,
+				EF8885492669A73400CE2F06 /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EF337F6025916EE300955AC3 /* First.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF337F6125916EE300955AC3 /* Base */,
+			);
+			name = First.storyboard;
+			sourceTree = "<group>";
+		};
+		EF337F6525916EE300955AC3 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF337F6625916EE300955AC3 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF337F6925916EE300955AC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EF337F6A25916EE300955AC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF337F6C25916EE300955AC3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D377A62DF751F6545D975EF0 /* Pods-WiFiProvisioning.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WiFiProvisioning/WiFiProvisioning.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RM4ZZ9ZAD4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSIoT\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSMobileClient\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCognitoIdentityProviderASF\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCognitoIdentityProvider\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSAuthCore\"",
+				);
+				INFOPLIST_FILE = WiFiProvisioning/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WiFiProvisioning;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.4.12;
+				PODS_PODFILE_DIR_PATH = /Users/livekim/Documents/work4/WiFiProvisioning_2.4.12/.;
+				PODS_ROOT = /Users/livekim/Documents/work4/WiFiProvisioning_2.4.12/Pods;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diasemi.WiFiProvisioning;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF337F6D25916EE300955AC3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6E59B4EE694530C88A43C89 /* Pods-WiFiProvisioning.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = WiFiProvisioning/WiFiProvisioningRelease.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = RM4ZZ9ZAD4;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaAsyncSocket\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SideMenu\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSIoT\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSMobileClient\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCognitoIdentityProviderASF\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSCognitoIdentityProvider\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AWSAuthCore\"",
+				);
+				INFOPLIST_FILE = WiFiProvisioning/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = WiFiProvisioning;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.4.12;
+				PODS_PODFILE_DIR_PATH = /Users/livekim/Documents/work4/WiFiProvisioning_2.4.12/.;
+				PODS_ROOT = /Users/livekim/Documents/work4/WiFiProvisioning_2.4.12/Pods;
+				PRODUCT_BUNDLE_IDENTIFIER = com.diasemi.WiFiProvisioning;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF337F5225916EE300955AC3 /* Build configuration list for PBXProject "WiFiProvisioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF337F6925916EE300955AC3 /* Debug */,
+				EF337F6A25916EE300955AC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF337F6B25916EE300955AC3 /* Build configuration list for PBXNativeTarget "WiFiProvisioning" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF337F6C25916EE300955AC3 /* Debug */,
+				EF337F6D25916EE300955AC3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF337F4F25916EE300955AC3 /* Project object */;
+}

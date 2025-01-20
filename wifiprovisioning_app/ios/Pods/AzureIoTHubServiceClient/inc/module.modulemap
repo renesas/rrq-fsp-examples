@@ -1,0 +1,12 @@
+module AzureIoTHubServiceClient [system][extern_c] {
+    header "iothub_devicemethod.h"
+    header "iothub_devicetwin.h"
+    header "iothub_message.h"
+    header "iothub_messaging.h"
+    header "iothub_messaging_ll.h"
+    header "iothub_registrymanager.h"
+    header "iothub_sc_version.h"
+    header "iothub_service_client_auth.h"
+    header "parson.h"
+    export *
+}
