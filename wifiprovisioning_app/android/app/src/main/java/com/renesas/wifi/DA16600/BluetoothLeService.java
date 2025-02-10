@@ -192,7 +192,7 @@ public class BluetoothLeService extends Service {
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt,
                                             BluetoothGattCharacteristic characteristic) {
-            MyLog.i(">> onCharacteristicChanged()");
+            MyLog.i(">> onCharacteristicChanged() : "+characteristic.getUuid());
             broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);
         }
 
@@ -205,8 +205,6 @@ public class BluetoothLeService extends Service {
                 MyLog.i("Failed to subscribe for characteristic[" + descriptor.getUuid() + "] notifications: err=" + status);
             }
         }
-
-
 
         private void broadcastUpdate(final String action) {
             final Intent intent = new Intent(action);
@@ -241,6 +239,7 @@ public class BluetoothLeService extends Service {
                     MyLog.i(">> WIFI_ACTION_RESULT = " + getWiFiActionResult(intResponse));
 
                     if (actionResult == WIFI_ACTION_RESULT.COMBO_WIFI_CMD_CALLBACK) {
+                        MyLog.i(">> COMBO_WIFI_CMD_CALLBACK");
                         if (StaticDataSave.device.equals("RRQ61400")) {
                             // Do not call any BLE operations here - we are inside async call and this can
                             // lead to undefined behavior (for example, missed notifications or dropped
@@ -257,6 +256,7 @@ public class BluetoothLeService extends Service {
                         }
 
                     } else if (actionResult == WIFI_ACTION_RESULT.COMBO_WIFI_CMD_SCAN_AP_SUCCESS) {
+                        MyLog.i(">> COMBO_WIFI_CMD_SCAN_AP_SUCCESS");
                         if (StaticDataSave.device.equals("RRQ61400")) {
                             // Do not call any BLE operations here - we are inside async call and this can
                             // lead to undefined behavior (for example, missed notifications or dropped
@@ -381,6 +381,10 @@ public class BluetoothLeService extends Service {
                                 DeviceControlActivity.getInstance().dismissScanningDialog();
 
                                 sb.setLength(0);
+
+                                //[[add in v2.4.15
+                                mNotificationsSubscribed = false;
+                                //]]
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -506,11 +510,64 @@ public class BluetoothLeService extends Service {
                                     Handler handler = DeviceControlActivity.mHandler;
                                     handler.removeMessages(DeviceControlActivity.HandleMsg.E_BLE_CMD_TIMEOUT);
 
-                                    DeviceControlActivity.getInstance().sendAPinfo(
+                                    //[[change in v2.4.15
+                                    /*DeviceControlActivity.getInstance().sendAPinfo(
                                             StaticDataSave.networkSSID,
                                             StaticDataSave.networkSecurityNum,
                                             StaticDataSave.networkPassword,
-                                            StaticDataSave.isHidden);
+                                            StaticDataSave.isHidden);*/
+                                    if (StaticDataSave.device.equals("RRQ61400")) {
+                                        if (StaticDataSave.networkSecurityNum == 1
+                                                || StaticDataSave.networkSecurityNum == 2
+                                                || StaticDataSave.networkSecurityNum == 3
+                                                || StaticDataSave.networkSecurityNum == 5) {
+                                            DeviceControlActivity.getInstance().sendAPinfo(
+                                                    StaticDataSave.networkSSID,
+                                                    StaticDataSave.networkSecurityNum,
+                                                    StaticDataSave.networkPassword,
+                                                    StaticDataSave.isHidden);
+                                        } else if (StaticDataSave.networkSecurityNum == 4) {
+                                            DeviceControlActivity.getInstance().sendEnterpriseAPinfo(
+                                                    StaticDataSave.networkSSID,
+                                                    StaticDataSave.networkSecurityNum,
+                                                    StaticDataSave.enterpriseAuthType,
+                                                    StaticDataSave.enterpriseAuthProtocol,
+                                                    StaticDataSave.enterpriseID,
+                                                    StaticDataSave.enterprisePassword,
+                                                    StaticDataSave.isHidden);
+                                        }
+                                    } else {
+                                        if (StaticDataSave.networkSecurityNum == 1
+                                                || StaticDataSave.networkSecurityNum == 2
+                                                || StaticDataSave.networkSecurityNum == 3
+                                                || StaticDataSave.networkSecurityNum == 4
+                                                || StaticDataSave.networkSecurityNum == 6
+                                                || StaticDataSave.networkSecurityNum == 7) {
+
+                                            DeviceControlActivity.getInstance().sendAPinfo(
+                                                    StaticDataSave.networkSSID,
+                                                    StaticDataSave.networkSecurityNum,
+                                                    StaticDataSave.networkPassword,
+                                                    StaticDataSave.isHidden);
+
+                                        } else if (StaticDataSave.networkSecurityNum == 8
+                                                || StaticDataSave.networkSecurityNum == 9
+                                                || StaticDataSave.networkSecurityNum == 10
+                                                || StaticDataSave.networkSecurityNum == 11
+                                                || StaticDataSave.networkSecurityNum == 12
+                                                || StaticDataSave.networkSecurityNum == 13) {
+
+                                            DeviceControlActivity.getInstance().sendEnterpriseAPinfo(
+                                                    StaticDataSave.networkSSID,
+                                                    StaticDataSave.networkSecurityNum,
+                                                    StaticDataSave.enterpriseAuthType,
+                                                    StaticDataSave.enterpriseAuthProtocol,
+                                                    StaticDataSave.enterpriseID,
+                                                    StaticDataSave.enterprisePassword,
+                                                    StaticDataSave.isHidden);
+                                        }
+                                    }
+                                    //]]
 
                                 } else if (result == 105) {
 
@@ -523,15 +580,14 @@ public class BluetoothLeService extends Service {
                                     if (jsonObject.has("security")) {
                                         int securityNumber;
                                         securityNumber = jsonObject.getInt("security");
-                                        if (securityNumber == 0) {
-                                            security = "none";
-                                        } else if (securityNumber == 1) {
-                                            security = "WEP";
-                                        } else if (securityNumber == 2) {
-                                            security = "WPA";
-                                        } else if (securityNumber == 3) {
-                                            security = "WPA2";
+                                        //[[change in v2.4.15
+                                        //security = convertStringSecurity(securityNumber);
+                                        if (StaticDataSave.device.equals("RRQ61400")) {
+                                            security = convertStringSecurity1(securityNumber);
+                                        } else {
+                                            security = convertStringSecurity(securityNumber);
                                         }
+                                        //]]
                                     }
 
                                     Handler mHandler = new Handler(Looper.getMainLooper());
@@ -1018,6 +1074,9 @@ public class BluetoothLeService extends Service {
             MyLog.i("BluetoothAdapter not initialized");
             return;
         }
+        //[[add in v2.4.15
+        MyLog.i(">> readCharacteristic : "+characteristic.getUuid());
+        //]]
         mBluetoothGatt.readCharacteristic(characteristic);
     }
 
@@ -1112,7 +1171,9 @@ public class BluetoothLeService extends Service {
         // do not issue any command until subscription is done
         if (StaticDataSave.device.equals("RRQ61400")) {
             int retries = 5;
+            MyLog.i("mNotificationsSubscribed : " + String.valueOf(mNotificationsSubscribed));
             while (!mNotificationsSubscribed && (retries > 0)) {
+                MyLog.e("retries = "+retries);
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {
@@ -1126,6 +1187,7 @@ public class BluetoothLeService extends Service {
             }
             characteristic.setValue(stringData);
             mBluetoothGatt.writeCharacteristic(characteristic);
+            MyLog.i("Write Characteristic: " + characteristic.getUuid());
         } else {
             characteristic.setValue(stringData);
             mBluetoothGatt.writeCharacteristic(characteristic);
@@ -1243,4 +1305,61 @@ public class BluetoothLeService extends Service {
         }
         mBluetoothGatt.discoverServices();
     }
+
+    private String convertStringSecurity(int securityNumber) {
+        String stringSecurity = "";
+        if (securityNumber == 0) {
+            stringSecurity = "none";
+        } else if (securityNumber == 1) {
+            stringSecurity = "WEP";
+        } else if (securityNumber == 2) {
+            stringSecurity = "WPA";
+        } else if (securityNumber == 3) {
+            stringSecurity = "WPA2";
+        } else if (securityNumber == 4) {
+            stringSecurity = "WPA/WPA2";
+        } else if (securityNumber == 5) {
+            stringSecurity = "WPA3OWE";
+        } else if (securityNumber == 6) {
+            stringSecurity = "WPA3SAE";
+        } else if (securityNumber == 7) {
+            stringSecurity = "WPA2/WPA3SAE";
+        } else if (securityNumber == 8) {
+            stringSecurity = "WPA-EAP";
+        } else if (securityNumber == 9) {
+            stringSecurity = "WPA2-EAP";
+        } else if (securityNumber == 10) {
+            stringSecurity = "WPA/WPA2-EAP";
+        } else if (securityNumber == 11) {
+            stringSecurity = "WPA3-EAP";
+        } else if (securityNumber == 12) {
+            stringSecurity = "WPA2/WPA3-EAP";
+        } else if (securityNumber == 13) {
+            stringSecurity = "WPA3-EAP-192B";
+        }
+        return stringSecurity;
+    }
+
+    //[[add in v2.4.15
+    private String convertStringSecurity1(int securityNumber) {
+        String stringSecurity = "";
+        if (securityNumber == 0) {
+            stringSecurity = "OPEN";
+        } else if (securityNumber == 1) {
+            stringSecurity = "WEP";
+        } else if (securityNumber == 2) {
+            stringSecurity = "WPA";
+        } else if (securityNumber == 3) {
+            stringSecurity = "WPA2";
+        } else if (securityNumber == 4) {
+            stringSecurity = "WPA2-ENT";
+        } else if (securityNumber == 5) {
+            stringSecurity = "WPA3";
+        } else if (securityNumber == 6) {
+            stringSecurity = "UNKNOWN";
+        }
+        return stringSecurity;
+    }
+    //]]
+
 }

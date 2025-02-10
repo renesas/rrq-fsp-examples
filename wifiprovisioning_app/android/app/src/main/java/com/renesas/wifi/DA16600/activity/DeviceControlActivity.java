@@ -66,6 +66,7 @@ import com.renesas.wifi.DA16600.BluetoothLeService;
 import com.renesas.wifi.DA16600.InputPasswordDialog;
 import com.renesas.wifi.DA16600.InputSsidPasswordDialog;
 import com.renesas.wifi.DA16600.MyGattAttributes;
+import com.renesas.wifi.DA16600.dialog.EnterpriseDialog;
 import com.renesas.wifi.R;
 import com.renesas.wifi.DA16600.adapter.ap.APListViewAdapter;
 import com.renesas.wifi.DA16600.adapter.ap.APRowItem;
@@ -96,6 +97,11 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
     private final static String TAG = DeviceControlActivity.class.getSimpleName();
 
     public static Context mContext;
+
+    //[[add in v2.4.15
+    private boolean mShouldUnbind = false;
+    boolean mIsBound = false;
+    //]]
 
     //handler
     public static DeviceControlHandler mHandler;
@@ -293,18 +299,25 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
 
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder service) {
+            MyLog.i( "onServiceConnected");
             mBluetoothLeService = ((BluetoothLeService.LocalBinder) service).getService();
             if (!mBluetoothLeService.initialize()) {
                 MyLog.e( "Unable to initialize Bluetooth");
                 finish();
             }
             mBluetoothLeService.connect(StaticDataSave.mDeviceAddress);
+            //[[add in v2.4.15
+            mIsBound = true;
+            //]]
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             MyLog.i( "onServiceDisconnected");
             mBluetoothLeService = null;
+            //[[add in v2.4.15
+            mIsBound = false;
+            //]]
         }
     };
 
@@ -325,8 +338,10 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                 btn_bleConnect.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        mBluetoothLeService.disconnect();
+                        //[[change in v2.4.15
+                        //mBluetoothLeService.disconnect();
+                        mBluetoothLeService.mBluetoothGatt.disconnect();
+                        //]]
                     }
                 });
 
@@ -390,7 +405,7 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                     if(value == null) {
                         MyLog.e( "value is null");
                     } else {
-                        MyLog.e("data = " + value);
+                        MyLog.i("data = " + value);
                         if (value.equals("100")) {
                             mBluetoothLeService.readCharacteristic(DeviceControlActivity.WIFI_SVC_PROV_DATA);
                         } else {
@@ -399,13 +414,14 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                     }
                 } else {
                     if(value != null) {
-                        MyLog.e("data = "+value.toString());
+                        MyLog.i("data = "+value.toString());
                     }
                     else {
                         MyLog.e( "value = null");
                     }
                 }
             }
+
         }
     };
 
@@ -593,36 +609,117 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                         btn_connect.setText("Connect to "+StaticDataSave.networkSSID);
                     }
 
+                    /*
+                        typedef enum
+                        {
+                            eWiFiSecurityOpen = 0,             	///< Open - No Security
+                                    eWiFiSecurityWEP,                  	///< WEP
+                                    eWiFiSecurityWPA,                  	///< WPA
+                                    eWiFiSecurityWPA2,                 	///< WPA2 (RSN)
+                                    eWiFiSecurityWPA_AUTO,              	///< WPA & WPA2 (RSN)
+                                    eWiFiSecurityOWE,      			///< WPA3 OWE
+                                    eWiFiSecuritySAE,      			///< WPA3 SAE
+                                    eWiFiSecurityRSN_SAE,        		///< WPA2 (RSN) & WPA3 SAE
+                                    eWiFiSecurityWPA_EAP,               	///< WPA Enterprise
+                                    eWiFiSecurityWPA2_EAP,              	///< WPA2 Enterprise
+                                    eWiFiSecurityWPA_AUTO_EAP,          	///< WPA & WPA2 Enterprise
+                                    eWiFiSecurityWPA3_EAP,              	///< WPA3 Enterprise
+                                    eWiFiSecurityWPA2_AUTO_EAP,        	 ///< WPA2 & WPA3 Enterprise
+                                    eWiFiSecurityWPA3_EAP_192B,         	///< WPA3 192B Enterprise DA16200 not support
+                                    eWiFiSecurityNotSupported          	///< Unknown Security
+                        } WIFISecurity_t;
+                        */
 
-                    if (StaticDataSave.networkSecurityNum > 0) {
-                        InputPasswordDialog inputPasswordDialog = new InputPasswordDialog(mContext);
-                        inputPasswordDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        inputPasswordDialog.setCancelable(true);
-                        inputPasswordDialog.getWindow().setGravity(Gravity.CENTER);
-                        inputPasswordDialog.show();
+                    //[[change in v2.4.15
+                    if (StaticDataSave.device.equals("RRQ61400")) {
+                        if (StaticDataSave.networkSecurityNum == 0) {
+                            rl_scanAP.setVisibility(View.INVISIBLE);
+                            ll_selectAP.setVisibility(View.VISIBLE);
 
+                            StaticDataSave.networkPassword = "";
+
+                            displayNetworkinfo(
+                                    StaticDataSave.pingAddress,
+                                    StaticDataSave.svrAddress,
+                                    StaticDataSave.svrPort,
+                                    StaticDataSave.svrUrl
+                            );
+
+                            StaticDataSave.isHidden = 0;
+
+                            displayAPinfo(StaticDataSave.networkSSID,
+                                    StaticDataSave.networkSecurityNum,
+                                    StaticDataSave.networkPassword,
+                                    StaticDataSave.isHidden
+                            );
+                        } else if (StaticDataSave.networkSecurityNum == 1
+                                        || StaticDataSave.networkSecurityNum == 2
+                                        || StaticDataSave.networkSecurityNum == 3
+                                        || StaticDataSave.networkSecurityNum == 5) {
+                            InputPasswordDialog inputPasswordDialog = new InputPasswordDialog(mContext);
+                            inputPasswordDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            inputPasswordDialog.setCancelable(true);
+                            inputPasswordDialog.getWindow().setGravity(Gravity.CENTER);
+                            inputPasswordDialog.show();
+                        } else if (StaticDataSave.networkSecurityNum == 4) {
+                            EnterpriseDialog enterpriseDialog = new EnterpriseDialog(mContext);
+                            enterpriseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            enterpriseDialog.setCancelable(true);
+                            enterpriseDialog.getWindow().setGravity(Gravity.CENTER);
+                            enterpriseDialog.show();
+                        }
                     } else {
+                        if (StaticDataSave.networkSecurityNum == 0
+                                || StaticDataSave.networkSecurityNum == 5) {
 
-                        rl_scanAP.setVisibility(View.INVISIBLE);
-                        ll_selectAP.setVisibility(View.VISIBLE);
+                            rl_scanAP.setVisibility(View.INVISIBLE);
+                            ll_selectAP.setVisibility(View.VISIBLE);
 
-                        StaticDataSave.networkPassword = "";
+                            StaticDataSave.networkPassword = "";
 
-                        displayNetworkinfo(
-                                StaticDataSave.pingAddress,
-                                StaticDataSave.svrAddress,
-                                StaticDataSave.svrPort,
-                                StaticDataSave.svrUrl
-                        );
+                            displayNetworkinfo(
+                                    StaticDataSave.pingAddress,
+                                    StaticDataSave.svrAddress,
+                                    StaticDataSave.svrPort,
+                                    StaticDataSave.svrUrl
+                            );
 
-                        StaticDataSave.isHidden = 0;
+                            StaticDataSave.isHidden = 0;
 
-                        displayAPinfo(StaticDataSave.networkSSID,
-                                StaticDataSave.networkSecurityNum,
-                                StaticDataSave.networkPassword,
-                                StaticDataSave.isHidden
-                        );
+                            displayAPinfo(StaticDataSave.networkSSID,
+                                    StaticDataSave.networkSecurityNum,
+                                    StaticDataSave.networkPassword,
+                                    StaticDataSave.isHidden
+                            );
+
+                        } else if (StaticDataSave.networkSecurityNum == 1
+                                || StaticDataSave.networkSecurityNum == 2
+                                || StaticDataSave.networkSecurityNum == 3
+                                || StaticDataSave.networkSecurityNum == 4
+                                || StaticDataSave.networkSecurityNum == 6
+                                || StaticDataSave.networkSecurityNum == 7) {
+
+                            InputPasswordDialog inputPasswordDialog = new InputPasswordDialog(mContext);
+                            inputPasswordDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            inputPasswordDialog.setCancelable(true);
+                            inputPasswordDialog.getWindow().setGravity(Gravity.CENTER);
+                            inputPasswordDialog.show();
+
+                        } else if (StaticDataSave.networkSecurityNum == 8
+                                || StaticDataSave.networkSecurityNum == 9
+                                || StaticDataSave.networkSecurityNum == 10
+                                || StaticDataSave.networkSecurityNum == 11
+                                || StaticDataSave.networkSecurityNum == 12
+                                || StaticDataSave.networkSecurityNum == 13) {
+
+                            EnterpriseDialog enterpriseDialog = new EnterpriseDialog(mContext);
+                            enterpriseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                            enterpriseDialog.setCancelable(true);
+                            enterpriseDialog.getWindow().setGravity(Gravity.CENTER);
+                            enterpriseDialog.show();
+                        }
                     }
+                    //]]
                 }
             }
         });
@@ -705,7 +802,6 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                     ll_sendCommand.setVisibility(View.INVISIBLE);
                     mHandler.sendEmptyMessageDelayed(HandleMsg.E_BLE_NETWORK_SCAN_TIMEOUT, 20000);
                 }
-
                 sendCommand(jsonCommand);
             }
         });
@@ -717,6 +813,9 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         super.onResume();
         Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
         bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+        //[[add in v2.4.15
+        mShouldUnbind = true;
+        //]]
 
         mContext.registerReceiver(mGattUpdateReceiver, makeGattUpdateIntentFilter(), RECEIVER_EXPORTED);
 
@@ -734,9 +833,28 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
     protected void onPause() {
         MyLog.i( "== onPause() ==");
         super.onPause();
-        unbindService(mServiceConnection);
+        //[[modify in v2.4.15
+        //unbindService(mServiceConnection);
+        if(mShouldUnbind) {
+            unbindService(mServiceConnection);
+            mShouldUnbind = false;
+        }
+        //]]
+
         mBluetoothLeService = null;
-        unregisterReceiver(mGattUpdateReceiver);
+
+        //[[modify in v2.4.15
+        //unregisterReceiver(mGattUpdateReceiver);
+        try {
+            unregisterReceiver(mGattUpdateReceiver);
+        } catch (IllegalArgumentException e) {
+
+        } catch (Exception e) {
+
+        } finally {
+
+        }
+        //]]
         LocalBroadcastManager.getInstance(this).unregisterReceiver(mProgressReceiver);
     }
 
@@ -994,7 +1112,6 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                                                 mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
                                             }
                                         }
-
                                         showScanningDialog();
                                     }
                                 });
@@ -1047,9 +1164,28 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                                             e.printStackTrace();
                                         }
 
-                                        if (WIFI_SVC_WFCMD != null) {
-                                            mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
+                                        //[[add in v2.4.15
+                                        if (StaticDataSave.device.equals("RRQ61400")) {
+                                            if (WIFI_SVC_WFACT_RES != null) {
+                                                MyLog.i("SUBSCRIBE: WiFi Status");
+                                                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+                                            }
                                         }
+                                        //]]
+
+                                        if (StaticDataSave.device.equals("RRQ61400")) {
+                                            if (WIFI_SVC_WFCMD != null) {
+                                                mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
+                                            }
+                                        } else {
+                                            if (WIFI_SVC_WFCMD != null) {
+                                                mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
+                                            }
+                                            if (WIFI_SVC_WFACT_RES != null) {
+                                                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+                                            }
+                                        }
+                                        //]]
 
                                         if (btn_apScan != null) {
                                             btn_apScan.setEnabled(false);
@@ -1121,22 +1257,39 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                         isSecurity = new boolean[ssidList.size()];
                         level = new Integer[ssidList.size()];
                         for(int i = 0; i < ssidList.size(); i++) {
-                            if (securityList.get(i) == 1 || securityList.get(i) == 2 || securityList.get(i) == 3) {
+                            if (securityList.get(i) == 0 || securityList.get(i) == 5) {
                                 ssid[i] = ssidList.get(i);
-                                stringSecurity[i] = convertStringSecurity(securityList.get(i));
-                                secMode[i] = securityList.get(i);
-                                isSecurity[i] = true;
-                                level[i] = signalList.get(i);
-                                signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
-                            } else if (securityList.get(i) == 0) {
-                                ssid[i] = ssidList.get(i);
-                                stringSecurity[i] = convertStringSecurity(securityList.get(i));
                                 secMode[i] = securityList.get(i);
                                 isSecurity[i] = false;
                                 level[i] = signalList.get(i);
-                                signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                //modify in v2.4.15
+                                //stringSecurity[i] = convertStringSecurity(securityList.get(i));
+                                //signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                if (StaticDataSave.device.equals("RRQ61400")) {
+                                    stringSecurity[i] = convertStringSecurity1(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar1(isSecurity[i], level[i]);
+                                } else {
+                                    stringSecurity[i] = convertStringSecurity(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                }
+                                //]]
+                            } else {
+                                ssid[i] = ssidList.get(i);
+                                secMode[i] = securityList.get(i);
+                                isSecurity[i] = true;
+                                level[i] = signalList.get(i);
+                                //modify in v2.4.15
+                                //stringSecurity[i] = convertStringSecurity(securityList.get(i));
+                                //signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                if (StaticDataSave.device.equals("RRQ61400")) {
+                                    stringSecurity[i] = convertStringSecurity1(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar1(isSecurity[i], level[i]);
+                                } else {
+                                    stringSecurity[i] = convertStringSecurity(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                }
+                                //]]
                             }
-
                         }
 
                         apRowItems = new ArrayList<APRowItem>();
@@ -1148,7 +1301,6 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                                     APRowItem item = new APRowItem(signalBar[i], ssid[i], stringSecurity[i], secMode[i], level[i]);
                                     apRowItems.add(item);
                                 }
-
                             } else {
                                 APRowItem item = new APRowItem(signalBar[i], ssid[i], stringSecurity[i], secMode[i], level[i]);
                                 apRowItems.add(item);
@@ -1187,6 +1339,46 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
             stringSecurity = "WPA";
         } else if (securityNumber == 3) {
             stringSecurity = "WPA2";
+        } else if (securityNumber == 4) {
+            stringSecurity = "WPA/WPA2";
+        } else if (securityNumber == 5) {
+            stringSecurity = "WPA3OWE";
+        } else if (securityNumber == 6) {
+            stringSecurity = "WPA3SAE";
+        } else if (securityNumber == 7) {
+            stringSecurity = "WPA2/WPA3SAE";
+        } else if (securityNumber == 8) {
+            stringSecurity = "WPA-EAP";
+        } else if (securityNumber == 9) {
+            stringSecurity = "WPA2-EAP";
+        } else if (securityNumber == 10) {
+            stringSecurity = "WPA/WPA2-EAP";
+        } else if (securityNumber == 11) {
+            stringSecurity = "WPA3-EAP";
+        } else if (securityNumber == 12) {
+            stringSecurity = "WPA2/WPA3-EAP";
+        } else if (securityNumber == 13) {
+            stringSecurity = "WPA3-EAP-192B";
+        }
+        return stringSecurity;
+    }
+
+    public String convertStringSecurity1(int securityNumber) {
+        String stringSecurity = "";
+        if (securityNumber == 0) {
+            stringSecurity = "none";
+        } else if (securityNumber == 1) {
+            stringSecurity = "WEP";
+        } else if (securityNumber == 2) {
+            stringSecurity = "WPA";
+        } else if (securityNumber == 3) {
+            stringSecurity = "WPA2";
+        } else if (securityNumber == 4) {
+            stringSecurity = "WPA2-ENT";
+        } else if (securityNumber == 5) {
+            stringSecurity = "WPA3";
+        } else if (securityNumber == 6) {
+            stringSecurity = "UNKNOWN";
         }
         return stringSecurity;
     }
@@ -1233,7 +1425,47 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         return signalBarID;
     }
 
+    public int wifiSignalBar1(boolean isSecurity, int level) {
 
+        int signalBarID = R.drawable.outline_signal_wifi_4_bar_lock_black_24;
+
+        if(level < -80) {
+            if (isSecurity == true) {
+                signalBarID = R.drawable.baseline_signal_wifi_1_bar_lock_black_48dp;
+            } else {
+                signalBarID = R.drawable.baseline_signal_wifi_0_bar_black_48dp;
+            }
+        }
+        else if(level < -60) {
+            if (isSecurity == true) {
+                signalBarID = R.drawable.baseline_signal_wifi_1_bar_lock_black_48dp;
+            } else {
+                signalBarID = R.drawable.baseline_signal_wifi_1_bar_black_48dp;
+            }
+        }
+        else if(level < -40) {
+            if (isSecurity == true) {
+                signalBarID = R.drawable.baseline_signal_wifi_2_bar_lock_black_48dp;
+            } else {
+                signalBarID = R.drawable.baseline_signal_wifi_2_bar_black_48dp;
+            }
+        }
+        else if(level < -20) {
+            if (isSecurity == true) {
+                signalBarID = R.drawable.baseline_signal_wifi_3_bar_lock_black_48dp;
+            } else {
+                signalBarID = R.drawable.baseline_signal_wifi_3_bar_black_48dp;
+            }
+        }
+        else {
+            if (isSecurity == true) {
+                signalBarID = R.drawable.outline_signal_wifi_4_bar_lock_black_24;
+            } else {
+                signalBarID = R.drawable.outline_signal_wifi_4_bar_black_24;
+            }
+        }
+        return signalBarID;
+    }
 
     public void sendNetworkinfo(String _pingAddress, String _svrAddress, int _svrPort, String _svrUrl) {
 
@@ -1251,6 +1483,15 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //[[add in v2.4.15
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+        //]]
 
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
@@ -1282,6 +1523,59 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //[[add in v2.4.15
+        /*if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }*/
+        //]]
+
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFCMD != null) {
+                mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
+            }
+        } else {
+            if (WIFI_SVC_WFCMD != null) {
+                mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
+            }
+            if (WIFI_SVC_WFACT_RES != null) {
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+    }
+
+    public void sendEnterpriseAPinfo(String _ssid, int _security, int _authType, int _authProtocol, String _userName, String _password, int _isHidden) {
+
+        final JSONObject obj = new JSONObject();
+        try {
+            obj.put("dialog_cmd", "select_ap");
+            obj.put("SSID", _ssid);
+            obj.put("security_type", _security);
+            obj.put("authType", _authType);
+            obj.put("authProtocol", _authProtocol);
+            obj.put("authID", _userName);
+            obj.put("authPW", _password);
+            obj.put("isHidden", _isHidden);
+
+            MyLog.i(">> sendEnterpriseAPinfo -> "+obj.toString());
+            MyLog.i(">> sendEnterpriseAPinfo size = "+obj.toString().getBytes().length);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //[[add in v2.4.15
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+        //]]
+
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
                 mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
@@ -1326,6 +1620,15 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //[[add in v2.4.15
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+        //]]
 
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
@@ -1406,6 +1709,39 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         }
     }
 
+    public void displayEnterpriseAPinfo(String _ssid, int _security, int _authType, int _authProtocol, String _userName, String _password, int _isHidden) {
+
+        String result = "";
+        String result_split = "";
+        final JSONObject obj = new JSONObject();
+        try {
+            obj.put("dialog_cmd", "select_ap");
+            obj.put("SSID", _ssid);
+            obj.put("security_type", _security);
+            obj.put("authType", _authType);
+            obj.put("authProtocol", _authProtocol);
+            obj.put("authID", _userName);
+            obj.put("authPW", _password);
+            obj.put("isHidden", _isHidden);
+            MyLog.i(">> displayEnterpriseAPinfo -> "+obj.toString());
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (obj != null) {
+            result = obj.toString();
+        }
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        JsonParser jp = new JsonParser();
+        JsonElement je = jp.parse(result);
+        result_split = gson.toJson(je);
+
+        if (et_rawCommand2 != null) {
+            et_rawCommand2.setText(result_split);
+        }
+    }
 
     public void sendGetThingNameCommand() {
         MyLog.i(">> sendGetThingNameCommand()");
@@ -1416,6 +1752,15 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //[[add in v2.4.15
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+        //]]
 
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
@@ -1441,6 +1786,15 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
             e.printStackTrace();
         }
 
+        //[[add in v2.4.15
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+        //]]
+
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
                 mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
@@ -1464,6 +1818,15 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        //[[add in v2.4.15
+        if (StaticDataSave.device.equals("RRQ61400")) {
+            if (WIFI_SVC_WFACT_RES != null) {
+                MyLog.i("SUBSCRIBE: WiFi Status");
+                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
+            }
+        }
+        //]]
 
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
@@ -1504,7 +1867,7 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
     }
 
     public void sendChkNetworkCommand() {
-
+        MyLog.i(">> sendChkNetworkCommand()");
         final JSONObject obj = new JSONObject();
         try {
             obj.put("dialog_cmd", "chk_network");
