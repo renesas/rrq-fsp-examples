@@ -123,6 +123,27 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
     var finalPassword: String!
     var finalIsHiddenWiFi: Int!
     
+    //[[add in v2.4.15
+    var mySSID: String!
+    var mySecurity: Int!
+    var myPassword: String!
+    var myIsHiddenWiFi: Int!
+    
+    var result_105:Int!
+    var ssid_105: String!
+    var password_105: String!
+    var security_105:Int!
+    //]]
+    
+    //[[add in v2.4.12
+    var finalAuthType: Int!
+    var finalAuthProtocol: Int!
+    var finalAuthID: String!
+    var finalAuthPW: String!
+    
+    var isShowSetEnterprise: Bool = false
+    //]]
+    
     var customCommand: String!
     
     var mTimer:Timer?
@@ -693,6 +714,7 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
                 NSLog("\(#fileID):\(#line) >> wifiProvDataCharacteristic Data received")
                 
                 let valueString  = String(decoding: value, as: UTF8.self)
+                
                 let encodedString: NSData = (valueString as NSString).data(using:String.Encoding.utf8.rawValue)! as NSData
                 let json = try? JSON(data: encodedString as Data)
                 
@@ -713,26 +735,74 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
                 } else if (result == 104) {  //COMBO_WIFI_CMD_NETWORK_INFO_CALLBACK
                     NSLog("\(#fileID):\(#line) >> result = COMBO_WIFI_CMD_NETWORK_INFO_CALLBACK")
                     self.stopTimer()
-                    self.sendApInfo()
+                    //[[modify in v2.4.12
+                    //self.sendApInfo()
+//                    if (self.appDelegate.apInfo_DA16600.security == 4) {
+//                        self.sendApInfo()
+//                    } else {
+//                        self.sendEnterpriseApInfo()
+//                    }
+                    //]]
+                    
+                    //[[change in v2.4.14
+                    if (self.appDelegate.apInfo_DA16600.security == 4) {
+                        self.sendEnterpriseApInfo()
+                    } else {
+                        self.sendApInfo()
+                    }
+                    //]]
+                    
                 } else if (result == 105) {  //COMBO_WIFI_PROV_AP_FAIL
                     NSLog("\(#fileID):\(#line) >> result = COMBO_WIFI_PROV_AP_FAIL")
                     Utility.hideLoader(view: self.view)
                     
-                    let ssid_105 = json?["ssid"].stringValue
-                    let password_105 = json?["passwd"].stringValue
-                    let security_105 = json?["security"].intValue
+                    //[[modify in v2.4.15
+                    
+//                    print(">> valueString = \(valueString)")
+//                    if let range1 = valueString.range(of: "\"ssid\":\t\"") {
+//                        let start = range1.upperBound
+//                        if let endRange = valueString[start...].range(of: "\"") {
+//                            self.ssid_105 = String(valueString[start..<endRange.lowerBound])
+//                            print("ssid : \(String(describing: self.ssid_105!))")
+//                        }
+//                    }
+//                    
+//                    if let range2 = valueString.range(of: "\"passwd\":\t\"") {
+//                        let start = range2.upperBound
+//                        if let endRange = valueString[start...].range(of: "\"") {
+//                            self.password_105 = String(valueString[start..<endRange.lowerBound])
+//                            print("Password : \(String(describing: self.password_105!))")
+//                        }
+//                    }
+//                    
+//                    if let range3 = valueString.range(of: "\"security\":\t") {
+//                        let start = range3.upperBound
+//                        if let endRange = valueString[start...].range(of: "\n}") {
+//                            self.security_105 = Int(valueString[start..<endRange.lowerBound])
+//                            print("Security : \(String(describing: self.security_105!))")
+//                        }
+//                    }
+
+                    
+                    
+                    
+                    self.ssid_105 = json?["ssid"].stringValue
+                    self.password_105 = json?["passwd"].stringValue
+                    self.security_105 = json?["security"].intValue
+                    
+                    //]]
                     var stringSecurity_105:String! = ""
-                    if (security_105 == 0) {
+                    if (self.security_105 == 0) {
                         stringSecurity_105 = "none"
-                    } else if (security_105 == 1) {
+                    } else if (self.security_105 == 1) {
                         stringSecurity_105 = "WEP"
-                    } else if (security_105 == 2) {
+                    } else if (self.security_105 == 2) {
                         stringSecurity_105 = "WPA"
-                    } else if (security_105 == 3) {
+                    } else if (self.security_105 == 3) {
                         stringSecurity_105 = "WPA2"
                     }
-                    NSLog("\(#fileID):\(#line) >> ssid : \(String(describing: ssid_105!)), password : \(String(describing: password_105!)), security : \(String(describing: stringSecurity_105))")
-                    self.showApFailDialog(ssid:ssid_105!, password:password_105!, security:stringSecurity_105!)
+                    NSLog("\(#fileID):\(#line) >> ssid : \(String(describing: self.ssid_105))), password : \(String(describing: self.password_105)), security : \(String(describing: stringSecurity_105!))")
+                    self.showApFailDialog(ssid:self.ssid_105, password:self.password_105, security:stringSecurity_105)
                 } else if (result == 106) {  //COMBO_WIFI_PROV_DNS_FAIL_SERVER_FAIL
                     NSLog("\(#fileID):\(#line) >> result = COMBO_WIFI_PROV_DNS_FAIL_SERVER_FAIL")
                     Utility.hideLoader(view: self.view)
@@ -973,6 +1043,7 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
         NSLog("\(#fileID):\(#line) >> sendApInfo()")
         let jsonString = self.tvData2!.text.replacingOccurrences(of: "\n", with: "")
         NSLog("\(#fileID):\(#line) >> \(jsonString)")
+        
         let oJsonDataT:Data? = jsonString.data(using: .utf8)
         if let oJsonData = oJsonDataT {
             do {
@@ -981,7 +1052,13 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
                 if let oJsonDictionary = oJsonDictionaryT {
                     if let ssid = oJsonDictionary["SSID"] as? String {
                         NSLog("\(#fileID):\(#line) >> \(ssid)")
-                        self.finalSSID = ssid
+                        //[[change in v2.4.15
+                        //self.finalSSID = ssid
+                        self.finalSSID = ssid.replacingOccurrences(of: "\\t", with: "\\\\t")
+                                            .replacingOccurrences(of: "\\n", with: "\\\\n")
+                                            .replacingOccurrences(of: "\\", with: "\\\\")
+                                            .replacingOccurrences(of: "\"", with: "\\\"")
+                        //]]
                     }
                     if let security = oJsonDictionary["security_type"] as? Int {
                         NSLog("\(#fileID):\(#line) >> \(security)")
@@ -1007,7 +1084,62 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
         NSLog("\(#fileID):\(#line) >> select_ap command data size: \(data.count)")
         connectedPeripheral!.writeValue(data, for: wifiCmdCharacteristic!, type: .withResponse)
         
+        
     }
+    
+    //[[add in v2.4.12
+    func sendEnterpriseApInfo() {
+        NSLog("\(#fileID):\(#line) >> sendEnterpriseApInfo()")
+        let jsonString = self.tvData2!.text.replacingOccurrences(of: "\n", with: "")
+        NSLog("\(#fileID):\(#line) >> \(jsonString)")
+        let oJsonDataT:Data? = jsonString.data(using: .utf8)
+        if let oJsonData = oJsonDataT {
+            do {
+                var oJsonDictionaryT:[String:Any]?
+                oJsonDictionaryT = try! JSONSerialization.jsonObject(with: oJsonData, options: []) as! [String:Any]
+                if let oJsonDictionary = oJsonDictionaryT {
+                    if let ssid = oJsonDictionary["SSID"] as? String {
+                        NSLog("\(#fileID):\(#line) >> \(ssid)")
+                        self.finalSSID = ssid
+                    }
+                    if let security = oJsonDictionary["security_type"] as? Int {
+                        NSLog("\(#fileID):\(#line) >> \(security)")
+                        self.finalSecurity = security
+                    }
+                    if let authType = oJsonDictionary["authType"] as? Int {
+                        NSLog("\(#fileID):\(#line) >> \(authType)")
+                        self.finalAuthType = authType
+                    }
+                    if let authProtocol = oJsonDictionary["authProtocol"] as? Int {
+                        NSLog("\(#fileID):\(#line) >> \(authProtocol)")
+                        self.finalAuthProtocol = authProtocol
+                    }
+                    if let authID = oJsonDictionary["authID"] as? String {
+                        NSLog("\(#fileID):\(#line) >> \(authID)")
+                        self.finalAuthID = authID
+                    }
+                    if let authPW = oJsonDictionary["authPW"] as? String {
+                        NSLog("\(#fileID):\(#line) >> \(authPW)")
+                        self.finalAuthPW = authPW
+                    }
+                    if let isHidden = oJsonDictionary["isHidden"] as? Int {
+                        NSLog("\(#fileID):\(#line) >> \(isHidden)")
+                        self.finalIsHiddenWiFi = isHidden
+                    }
+                }
+            }
+        }
+        
+        let cmd = "{\"dialog_cmd\":\"select_ap\",\"SSID\":\"\(self.finalSSID!)\",\"security_type\":\(self.finalSecurity!),\"authType\":\(appDelegate.apInfo.enterpriseAuthType), \"authProtocol\":\(appDelegate.apInfo.enterpriseAuthProtocol), \"authID\":\"\(appDelegate.apInfo.enterpriseID)\", \"authPW\":\"\(appDelegate.apInfo.enterprisePassword)\", \"isHidden\":\(self.finalIsHiddenWiFi!)}"
+
+        
+        NSLog("\(#fileID):\(#line) >> \(cmd)")
+        let data = cmd.data(using: String.Encoding.utf8)!
+        NSLog("\(#fileID):\(#line) >> select_ap command data size: \(data.count)")
+        connectedPeripheral!.writeValue(data, for: wifiCmdCharacteristic!, type: .withResponse)
+        
+    }
+    //]]
     
     func sendGetThingNameCommand() {
         NSLog("\(#fileID):\(#line) >> sendGetThingNameCommand()")
@@ -1114,32 +1246,73 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let ssid = APListSSID[indexPath.row]
+        //[[change in v2.4.15
+        //let ssid = APListSSID[indexPath.row]
+        let ssid = APListSSID[indexPath.row].replacingOccurrences(of: "\\t", with: "\\\\t")
+            .replacingOccurrences(of: "\\n", with: "\\\\n")
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "\\\"")
+        //]]
         
-        NSLog("\(#fileID):\(#line) >> Selected SSID = \(APListSSID[indexPath.row])")
+        //NSLog("\(#fileID):\(#line) >> Selected SSID = \(APListSSID[indexPath.row])")
+        NSLog("\(#fileID):\(#line) >> Selected SSID = \(ssid)")
         NSLog("\(#fileID):\(#line) >> Selected RSSI = \(APListSignal[indexPath.row])")
         NSLog("\(#fileID):\(#line) >> Selected Security = \(APListSecurity[indexPath.row])")
         
         let security = APListSecurity[indexPath.row]
         
-        appDelegate.apInfo_DA16600.ssid = ssid
+        //[[change in v2.4.15
+        //appDelegate.apInfo_DA16600.ssid = ssid
+        let replaceSSID = ssid.replacingOccurrences(of: "\t", with: "\\t")
+            .replacingOccurrences(of: "\n", with: "\\n")
+            .replacingOccurrences(of: "\"", with: "\\\"")
+            
+        appDelegate.apInfo_DA16600.ssid = replaceSSID
+        NSLog("\(#fileID):\(#line) >> appDelegate.apInfo_DA16600.ssid = \(appDelegate.apInfo_DA16600.ssid)")
+        //]]
+        
         appDelegate.apInfo_DA16600.security = security
         
-        if (security > 0) {
-            showPasswordAlert()
+        //[[modify in v2.4.12
+        //if (security > 0) {
+        if (appDelegate.peripheralName.contains("RRQ")) {
+            if (security == 1 || security == 2 || security == 3 || security == 5) {
+                showPasswordAlert()
+            } else if (security == 4) {
+                NSLog("\(#fileID):\(#line) >> Show SetEnterpriseViewController!")
+                self.isShowSetEnterprise = true
+                let setEnterpriseVC = UIStoryboard(name: "First", bundle: nil).instantiateViewController(withIdentifier: "SetEnterpriseViewController")
+                setEnterpriseVC.modalPresentationStyle = .fullScreen
+                present(setEnterpriseVC, animated: true, completion: nil)
+            } else {
+                self.appDelegate.apInfo_DA16600.pw = ""
+                self.networkTable.isHidden = true
+                
+                self.appDelegate.apInfo_DA16600.isHiddenWiFi = 0
+                
+                self.setRawText()
+                self.labelRawCommand.isHidden = false
+                self.tvData1.isHidden = false
+                self.tvData2.isHidden = false
+                self.btnConnect.setTitle("Connect to \(self.appDelegate.apInfo_DA16600.ssid)", for: .normal)
+                self.btnConnect.isHidden = false
+            }
         } else {
-            
-            self.appDelegate.apInfo_DA16600.pw = ""
-            self.networkTable.isHidden = true
-            
-            self.appDelegate.apInfo_DA16600.isHiddenWiFi = 0
-            
-            self.setRawText()
-            self.labelRawCommand.isHidden = false
-            self.tvData1.isHidden = false
-            self.tvData2.isHidden = false
-            self.btnConnect.setTitle("Connect to \(self.appDelegate.apInfo_DA16600.ssid)", for: .normal)
-            self.btnConnect.isHidden = false
+            if (security > 0) {
+                showPasswordAlert()
+            } else {
+                self.appDelegate.apInfo_DA16600.pw = ""
+                self.networkTable.isHidden = true
+                
+                self.appDelegate.apInfo_DA16600.isHiddenWiFi = 0
+                
+                self.setRawText()
+                self.labelRawCommand.isHidden = false
+                self.tvData1.isHidden = false
+                self.tvData2.isHidden = false
+                self.btnConnect.setTitle("Connect to \(self.appDelegate.apInfo_DA16600.ssid)", for: .normal)
+                self.btnConnect.isHidden = false
+            }
         }
         
     }
@@ -1162,11 +1335,26 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20.0)
             ]
         )
+        
+        //[[add in v2.4.15
+        let originSSID = self.appDelegate.apInfo_DA16600.ssid.replacingOccurrences(of: "\\t", with: "\t")
+            .replacingOccurrences(of: "\\n", with: "\n")
+            .replacingOccurrences(of: "\\\"", with: "\"")
+        //]]
+        
+        //[[change in v2.4.15
+//        let alertMessage = """
+//            
+//            Network : \(self.appDelegate.apInfo_DA16600.ssid)
+//            
+//            """
+        
         let alertMessage = """
             
-            Network : \(self.appDelegate.apInfo_DA16600.ssid)
+            Network : \(originSSID)
             
             """
+        //]]
         
         let messageParagraphStyle = NSMutableParagraphStyle()
         messageParagraphStyle.alignment = NSTextAlignment.left
@@ -1179,7 +1367,10 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
             ]
         )
         
-        let alert = UIAlertController.init(title: nil, message: "Network : \(self.appDelegate.apInfo_DA16600.ssid)", preferredStyle: .alert)
+        //[[change in v2.4.15
+        //let alert = UIAlertController.init(title: nil, message: "Network : \(self.appDelegate.apInfo_DA16600.ssid)", preferredStyle: .alert)
+        let alert = UIAlertController.init(title: nil, message: "Network : \(originSSID)", preferredStyle: .alert)
+        //]]
         alert.setValue(attributedTitleText, forKey: "attributedTitle")
         alert.setValue(attributedMessageText, forKey: "attributedMessage")
         let okAction = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
@@ -1197,7 +1388,10 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
             self.tvData1.isHidden = false
             self.tvData2.isHidden = false
             
-            self.btnConnect.setTitle("Connect to \(self.appDelegate.apInfo_DA16600.ssid)", for: .normal)
+            //[[change in v2.4.15
+            //self.btnConnect.setTitle("Connect to \(self.appDelegate.apInfo_DA16600.ssid)", for: .normal)
+            self.btnConnect.setTitle("Connect to \(originSSID)", for: .normal)
+            //]]
             self.btnConnect.isHidden = false
             
             usleep(100000)
@@ -1238,15 +1432,30 @@ class PeripheralConnectedViewController: UIViewController, CBCentralManagerDeleg
         }
         """
         
+        //[[change in v2.4.15
+//        self.tvData2.text = """
+//        {
+//        "dialog_cmd": "select_ap",
+//        "SSID": "\(self.appDelegate.apInfo_DA16600.ssid)",
+//        "security_type": \(self.appDelegate.apInfo_DA16600.security),
+//        "password": "\(self.appDelegate.apInfo_DA16600.pw)",
+//        "isHidden": \(self.appDelegate.apInfo_DA16600.isHiddenWiFi)
+//        }
+//        """
+        
         self.tvData2.text = """
-        {
-        "dialog_cmd": "select_ap",
-        "SSID": "\(self.appDelegate.apInfo_DA16600.ssid)",
-        "security_type": \(self.appDelegate.apInfo_DA16600.security),
-        "password": "\(self.appDelegate.apInfo_DA16600.pw)",
-        "isHidden": \(self.appDelegate.apInfo_DA16600.isHiddenWiFi)
-        }
-        """
+                {
+                "dialog_cmd": "select_ap",
+                "SSID": "\(self.appDelegate.apInfo_DA16600.ssid.replacingOccurrences(of: "\\t", with: "\t")
+                    .replacingOccurrences(of: "\\n", with: "\n")
+                    .replacingOccurrences(of: "\\\"", with: "\""))",
+                "security_type": \(self.appDelegate.apInfo_DA16600.security),
+                "password": "\(self.appDelegate.apInfo_DA16600.pw)",
+                "isHidden": \(self.appDelegate.apInfo_DA16600.isHiddenWiFi)
+                }
+                """
+        //]]
+
     }
     
     // MARK: - Timer

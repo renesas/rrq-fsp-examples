@@ -194,6 +194,9 @@ public class DeviceScanActivity extends Activity {
                         return;
                     }
                 }
+                //[[add in v2.4.16
+                StaticDataSave.mBleDevice = device;
+                //]]
                 StaticDataSave.mDeviceName = device.getName();
                 StaticDataSave.mDeviceAddress = device.getAddress();
                 if (mScanning) {

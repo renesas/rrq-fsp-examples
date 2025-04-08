@@ -245,7 +245,10 @@ public class BluetoothLeService extends Service {
                             // lead to undefined behavior (for example, missed notifications or dropped
                             // requests to characteristic)
                             // TODO: invent better method to pass event data to main UI thread then string
-                            intent.putExtra(EXTRA_DATA, "100");
+                            //[[change in v2.4.17
+                            //intent.putExtra(EXTRA_DATA, "100");
+                            intent.putExtra(EXTRA_DATA, "205");
+                            //]]
                         } else {
                             try {
                                 Thread.sleep(100);
@@ -262,7 +265,10 @@ public class BluetoothLeService extends Service {
                             // lead to undefined behavior (for example, missed notifications or dropped
                             // requests to characteristic)
                             // TODO: invent better method to pass event data to main UI thread then string
-                            intent.putExtra(EXTRA_DATA, "1");
+                            //[[change in v2.4.17
+                            //intent.putExtra(EXTRA_DATA, "1");
+                            intent.putExtra(EXTRA_DATA, "204");
+                            //]]
                         } else {
                             try {
                                 Thread.sleep(100);
@@ -279,12 +285,29 @@ public class BluetoothLeService extends Service {
                         MyLog.i(">> COMBO_WIFI_PROV_DATA_VALIDITY_CHK_ERR");
                     }
                     else if (actionResult == WIFI_ACTION_RESULT.COMBO_WIFI_CMD_AWS_CALLBACK) {
-                        try {
+                        //[[change in v2.4.17
+                        /*try {
                             Thread.sleep(100);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-                        readCharacteristic(DeviceControlActivity.WIFI_SVC_AWS_DATA);
+                        readCharacteristic(DeviceControlActivity.WIFI_SVC_AWS_DATA);*/
+
+                        if (StaticDataSave.device.equals("RRQ61400")) {
+                            // Do not call any BLE operations here - we are inside async call and this can
+                            // lead to undefined behavior (for example, missed notifications or dropped
+                            // requests to characteristic)
+                            // TODO: invent better method to pass event data to main UI thread then string
+                            intent.putExtra(EXTRA_DATA, "206");
+                        } else {
+                            try {
+                                Thread.sleep(100);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            readCharacteristic(DeviceControlActivity.WIFI_SVC_AWS_DATA);
+                        }
+                        //]]
                     }
                     else if (actionResult == WIFI_ACTION_RESULT.COMBO_WIFI_CMD_AZURE_CALLBACK) {
                         try {
@@ -330,7 +353,10 @@ public class BluetoothLeService extends Service {
                             // lead to undefined behavior (for example, missed notifications or dropped
                             // requests to characteristic)
                             // TODO: invent better method to pass event data to main UI thread then string
-                            intent.putExtra(EXTRA_DATA, "1");
+                            //[[change in v2.4.17
+                            //intent.putExtra(EXTRA_DATA, "1");
+                            intent.putExtra(EXTRA_DATA, "204");
+                            //]]
                         } else {
                             try {
                                 Thread.sleep(500);
@@ -517,7 +543,9 @@ public class BluetoothLeService extends Service {
                                             StaticDataSave.networkPassword,
                                             StaticDataSave.isHidden);*/
                                     if (StaticDataSave.device.equals("RRQ61400")) {
-                                        if (StaticDataSave.networkSecurityNum == 1
+
+                                        if (StaticDataSave.networkSecurityNum == 0  //add in v2.4.16
+                                                || StaticDataSave.networkSecurityNum == 1
                                                 || StaticDataSave.networkSecurityNum == 2
                                                 || StaticDataSave.networkSecurityNum == 3
                                                 || StaticDataSave.networkSecurityNum == 5) {
@@ -537,7 +565,8 @@ public class BluetoothLeService extends Service {
                                                     StaticDataSave.isHidden);
                                         }
                                     } else {
-                                        if (StaticDataSave.networkSecurityNum == 1
+                                        if (StaticDataSave.networkSecurityNum == 0  //add in v2.4.16
+                                                || StaticDataSave.networkSecurityNum == 1
                                                 || StaticDataSave.networkSecurityNum == 2
                                                 || StaticDataSave.networkSecurityNum == 3
                                                 || StaticDataSave.networkSecurityNum == 4
@@ -844,6 +873,9 @@ public class BluetoothLeService extends Service {
                                     }
                                 }).start();
                             }
+                            //[[add in v2.4.17
+                            mNotificationsSubscribed = false;
+                            //]]
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -1105,6 +1137,7 @@ public class BluetoothLeService extends Service {
         }
 
         if (WIFI_SVC_WFACT_RES_UUID.equals(characteristic.getUuid())) {
+
             MyLog.i("Subscribed to WIFI_SVC_WFACT_RES notification [" + characteristic.getUuid().toString() + "]");
             if (!StaticDataSave.device.equals("RRQ61400")) {
                 try {
@@ -1125,7 +1158,7 @@ public class BluetoothLeService extends Service {
             readCharacteristic(WIFI_SVC_APSCAN_RES);
         }
         else if (WIFI_SVC_PROV_DATA_UUID.equals(characteristic.getUuid())) {
-            MyLog.i("Subscribed to WIFI_SVC_WFACT_RES notification [" + characteristic.getUuid().toString() + "]");
+            MyLog.i("Subscribed to WIFI_SVC_PROV_DATA notification [" + characteristic.getUuid().toString() + "]");
             try {
                 Thread.sleep(100);
             } catch (Exception e) {
@@ -1133,6 +1166,7 @@ public class BluetoothLeService extends Service {
             }
             readCharacteristic(DeviceControlActivity.WIFI_SVC_PROV_DATA);
         }
+
     }
 
     @SuppressLint("MissingPermission")

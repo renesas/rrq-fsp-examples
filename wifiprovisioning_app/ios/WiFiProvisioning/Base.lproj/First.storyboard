@@ -28,14 +28,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1P-mg-g2z">
-                                <rect key="frame" x="40" y="204" width="295" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="f1P-mg-g2z">
+                                <rect key="frame" x="40" y="204" width="295" height="80"/>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.15686274509803921" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="UPl-TH-e06"/>
+                                    <constraint firstAttribute="height" constant="80" id="UPl-TH-e06"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Start DA16200/RRQ61000-based">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal">
+                                    <string key="title">Start with Wi-Fi only chip
+(DA16200/RRQ61000)</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -43,15 +45,16 @@
                                     <segue destination="hhw-1o-Vh6" kind="show" id="PBD-ya-Cuv"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUQ-Uc-yja">
-                                <rect key="frame" x="40" y="314" width="295" height="60"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zUQ-Uc-yja">
+                                <rect key="frame" x="40" y="334" width="295" height="80"/>
                                 <color key="backgroundColor" red="0.16470588235294117" green="0.15686274509803921" blue="0.61568627450980395" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="PdP-Ce-4d2"/>
-                                    <constraint firstAttribute="height" constant="60" id="PyC-ax-lnd"/>
+                                    <constraint firstAttribute="height" constant="80" id="PyC-ax-lnd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Start DA16600/RRQ61400-based">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal">
+                                    <string key="title">Start with Wi-Fi+BLE combo chip
+(DA16600/RRQ61400/RRQ61051)</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>

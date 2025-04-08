@@ -141,6 +141,9 @@ public class SelectNetworkActivity extends BaseActivity implements View.OnClickL
     private MaterialDialog socketConnectTimeoutDialog = null;
     private MaterialDialog receiveAplistTimeoutDialog = null;
     private ProgressDialog registeringDialog = null;
+    //[[add in v2.4.16
+    private MaterialDialog noApListDialog = null;
+    //]]
 
     private StringBuffer sb = new StringBuffer();
     private MaterialDialog reconnectDialog = null;
@@ -2235,49 +2238,63 @@ public class SelectNetworkActivity extends BaseActivity implements View.OnClickL
 
         try {
             jsonArray = jsonObject.getJSONArray("APList");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject obj = jsonArray.getJSONObject(i);
-                int index = obj.getInt("index");
-                String ssid = obj.getString("SSID");
-                if (obj.has("secMode")) {
-                    boolean boolSecMode = obj.getBoolean("secMode");
-                    boolSecModeList.add(boolSecMode);
-                    isUnder2_3_13 = true;
-                }
-                if (obj.has("securityType")) {
-                    int intSecMode = obj.getInt("securityType");
-                    intSecModeList.add(intSecMode);
-                    isUnder2_3_13 = false;
-                }
-
-                int signal = obj.getInt("signal");
-
-                indexList.add(index);
-                ssidList.add(ssid);
-                signalList.add(signal);
-            }
-            MyLog.i("indexList = " + indexList.toString());
-            MyLog.i("ssidList = " + ssidList.toString());
-            MyLog.i("isUner2_3_13 = " + isUnder2_3_13);
-            if (isUnder2_3_13 == true) {
-                if (boolSecModeList != null) {
-                    MyLog.i("boolSecModeList = " + boolSecModeList.toString());
-                }
-            } else if (isUnder2_3_13 == false) {
-                if (intSecModeList != null) {
-                    MyLog.i("intSecModeList = " + intSecModeList.toString());
-                }
-            }
-
-            MyLog.i("signalList = " + signalList.toString());
-
-            if (isUnder2_3_13 == true) {
-                updateAPList();
+            //[[add in v2.4.16
+            if (jsonArray.length() == 0) {
+                MyLog.e("No AP List");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listView.setVisibility(View.INVISIBLE);
+                        ll_progressScanning.setVisibility(View.INVISIBLE);
+                        tv_noList.setVisibility(View.VISIBLE);
+                        showNoApListDialog();
+                    }
+                });
             } else {
-                updateAPList_1();
-            }
-            sb.setLength(0);
+                //]]
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+                    int index = obj.getInt("index");
+                    String ssid = obj.getString("SSID");
+                    if (obj.has("secMode")) {
+                        boolean boolSecMode = obj.getBoolean("secMode");
+                        boolSecModeList.add(boolSecMode);
+                        isUnder2_3_13 = true;
+                    }
+                    if (obj.has("securityType")) {
+                        int intSecMode = obj.getInt("securityType");
+                        intSecModeList.add(intSecMode);
+                        isUnder2_3_13 = false;
+                    }
 
+                    int signal = obj.getInt("signal");
+
+                    indexList.add(index);
+                    ssidList.add(ssid);
+                    signalList.add(signal);
+                }
+                MyLog.i("indexList = " + indexList.toString());
+                MyLog.i("ssidList = " + ssidList.toString());
+                MyLog.i("isUner2_3_13 = " + isUnder2_3_13);
+                if (isUnder2_3_13 == true) {
+                    if (boolSecModeList != null) {
+                        MyLog.i("boolSecModeList = " + boolSecModeList.toString());
+                    }
+                } else if (isUnder2_3_13 == false) {
+                    if (intSecModeList != null) {
+                        MyLog.i("intSecModeList = " + intSecModeList.toString());
+                    }
+                }
+
+                MyLog.i("signalList = " + signalList.toString());
+
+                if (isUnder2_3_13 == true) {
+                    updateAPList();
+                } else {
+                    updateAPList_1();
+                }
+                sb.setLength(0);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -3666,10 +3683,54 @@ public class SelectNetworkActivity extends BaseActivity implements View.OnClickL
     }
 
     private void dismissReceiveAplistTimeoutDialog() {
-        if (socketConnectTimeoutDialog != null) {
-            socketConnectTimeoutDialog.dismiss();
+        if (receiveAplistTimeoutDialog != null) {
+            receiveAplistTimeoutDialog.dismiss();
         }
     }
+
+    //[[add in v2.4.16
+    private void showNoApListDialog() {
+        if (noApListDialog != null) {
+            noApListDialog.dismiss();
+        }
+        if (mContext != null) {
+            noApListDialog = new MaterialDialog.Builder(mContext)
+                    .theme(Theme.LIGHT)
+                    .title("No AP List")
+                    .titleGravity(GravityEnum.CENTER)
+                    .titleColor(mContext.getResources().getColor(R.color.black))
+                    .content("There is no list of APs received.\n" +
+                            "The signal level of APs is too low or there are no APs.\n" +
+                            "Please check and rescan.")
+                    .contentColor(mContext.getResources().getColor(R.color.black))
+                    .positiveText("OK")
+                    .positiveColor(mContext.getResources().getColor(R.color.blue3))
+                    .onPositive(new MaterialDialog.SingleButtonCallback() {
+                        @Override
+                        public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                            dismissNoApListTimeoutDialog();
+                            iv_rescan.setEnabled(true);
+                            btn_hiddenWiFi.setEnabled(true);
+                            if (isSecure) {
+                                sw_tls.setChecked(true);
+                            } else {
+                                sw_tls.setChecked(false);
+                            }
+                        }
+                    })
+                    .build();
+            noApListDialog.getWindow().setGravity(Gravity.CENTER);
+            noApListDialog.show();
+        }
+
+    }
+
+    private void dismissNoApListTimeoutDialog() {
+        if (noApListDialog != null) {
+            noApListDialog.dismiss();
+        }
+    }
+    //]]
 
     public String convertStringSecurity(int securityNumber) {
         String stringSecurity = "";

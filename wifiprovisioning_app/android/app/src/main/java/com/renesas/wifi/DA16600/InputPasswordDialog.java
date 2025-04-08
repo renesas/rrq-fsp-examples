@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.renesas.wifi.DA16600.activity.DeviceControlActivity;
 import com.renesas.wifi.R;
+import com.renesas.wifi.util.MyLog;
 import com.renesas.wifi.util.StaticDataSave;
 
 public class InputPasswordDialog extends Dialog implements TextWatcher {

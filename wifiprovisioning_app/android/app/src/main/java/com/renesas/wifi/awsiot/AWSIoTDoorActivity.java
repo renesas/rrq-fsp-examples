@@ -541,6 +541,12 @@ public class AWSIoTDoorActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.awsiot_activity_door);
 
+        //[[add in v2.4.16
+        if (buildOption.AUTO_TEST == true) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        //]]
+
         getBuildInformation();
 
         awsConfig = new AWSConfig();
@@ -1535,6 +1541,9 @@ public class AWSIoTDoorActivity extends Activity {
             pastOtaTimestamp = curOtaTimestamp;
             isOtaUpdated = false;
         }
+        //[[add in v2.4.16
+        sendEvent(AWSEVENT.E_GET_SHADOW);
+        //]]
     }
 
     public int calBattery(float shadowBattery) {
@@ -2812,7 +2821,7 @@ public class AWSIoTDoorActivity extends Activity {
     }
 
     private void updateTemperaureUI(final float value) {
-
+        MyLog.i(">> updateTemperaureUI()");
         if (value >= 100) {
             temperatureText.setText("- -" + " \u00b0" + "C");
             temperatureText.setTextColor(mContext.getResources().getColor(R.color.black));
@@ -2824,7 +2833,6 @@ public class AWSIoTDoorActivity extends Activity {
             temperatureText.setText(String.format("%.1f", value) + " \u00b0" + "C");
             temperatureText.setTextColor(mContext.getResources().getColor(R.color.black));
             removeEvent(AWSEVENT.E_SHOW_TEMPERATURE_ALERT);
-
         }
     }
 

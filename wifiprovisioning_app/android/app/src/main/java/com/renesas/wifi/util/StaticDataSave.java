@@ -1,6 +1,7 @@
 package com.renesas.wifi.util;
 
 
+import android.bluetooth.BluetoothDevice;
 import android.content.SharedPreferences;
 
 
@@ -70,6 +71,10 @@ public class StaticDataSave {
 
     public static String mDeviceName = null;
     public static String mDeviceAddress = null;
+
+    //[[add in v2.4.16
+    public static BluetoothDevice mBleDevice = null;
+    //]]
 
     /*
      * AWS IoT *

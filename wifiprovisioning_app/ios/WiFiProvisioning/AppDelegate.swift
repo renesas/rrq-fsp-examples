@@ -32,14 +32,30 @@ struct ApInfo_DA16600 {
     var pw:String = ""
     var security:Int = -1
     var isHiddenWiFi:Int = -1
+    //[[add in v2.4.12
+    var enterpriseAuthType:Int = -1
+    var enterpriseAuthProtocol:Int = -1
+    var enterpriseID:String = ""
+    var enterprisePassword:String = ""
+    //]]
 }
+
+//[[RRQ61400 security
+//0 - none
+//1 - WEP
+//2 - WPA
+//3 - WPA2
+//4 - WPA2-ENT
+//5 - WPA3
+//6 - UNKNOWN
+//]]
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    let appVersion = "2.4.12"
+    let appVersion = "2.4.14"
     
     var deviceName = ""
     

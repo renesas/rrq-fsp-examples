@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import com.renesas.wifi.DA16600.activity.DeviceControlActivity;
 import com.renesas.wifi.R;
+import com.renesas.wifi.util.MyLog;
 import com.renesas.wifi.util.StaticDataSave;
 
 public class InputSsidPasswordDialog extends Dialog implements TextWatcher {

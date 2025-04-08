@@ -29,12 +29,18 @@ class MainViewController: UIViewController {
         self.btnDA16200.layer.shadowOpacity = 1;
         self.btnDA16200.layer.shadowRadius = 1;
         self.btnDA16200.layer.shadowOffset = CGSize(width: 1, height: 4)
+        //[[add in v2.4.12
+        self.btnDA16200.titleLabel!.textAlignment = NSTextAlignment.center;
+        //]]
         
         self.btnDA16600.layer.cornerRadius = 10
         self.btnDA16600.layer.shadowColor = UIColor(red: 30/255, green: 24/255, blue: 148/255, alpha: 1).cgColor
         self.btnDA16600.layer.shadowOpacity = 1;
         self.btnDA16600.layer.shadowRadius = 1;
         self.btnDA16600.layer.shadowOffset = CGSize(width: 1, height: 4)
+        //[[add in v2.4.12
+        self.btnDA16600.titleLabel!.textAlignment = NSTextAlignment.center;
+        //]]
         
     }
     

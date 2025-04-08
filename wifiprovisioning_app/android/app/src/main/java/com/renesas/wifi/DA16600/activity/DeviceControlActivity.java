@@ -305,7 +305,9 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                 MyLog.e( "Unable to initialize Bluetooth");
                 finish();
             }
+
             mBluetoothLeService.connect(StaticDataSave.mDeviceAddress);
+
             //[[add in v2.4.15
             mIsBound = true;
             //]]
@@ -406,11 +408,25 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                         MyLog.e( "value is null");
                     } else {
                         MyLog.i("data = " + value);
-                        if (value.equals("100")) {
+                        //[[change in v2.4.17
+                        /*if (value.equals("100")) {
                             mBluetoothLeService.readCharacteristic(DeviceControlActivity.WIFI_SVC_PROV_DATA);
                         } else {
                             mBluetoothLeService.readCharacteristic(DeviceControlActivity.WIFI_SVC_APSCAN_RES);
+                        }*/
+                        if (value.equals("204")) {
+                            mBluetoothLeService.readCharacteristic(DeviceControlActivity.WIFI_SVC_APSCAN_RES);
+                        } else if (value.equals("205")) {
+                            mBluetoothLeService.readCharacteristic(DeviceControlActivity.WIFI_SVC_PROV_DATA);
+                        } else if (value.equals("206")) {
+                            try {
+                                Thread.sleep(100);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            mBluetoothLeService.readCharacteristic(DeviceControlActivity.WIFI_SVC_AWS_DATA);
                         }
+                        //]]
                     }
                 } else {
                     if(value != null) {
@@ -604,9 +620,24 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
 
                     MyLog.i("StaticDataSave.networkSecurityNum = " + apRowItems.get(position).getSecurityType());
 
+                    //[[add in v2.4.18
+                    String displaySSID;
+                    displaySSID = StaticDataSave.networkSSID.replace("\\\\", "\\");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\r", "\r");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\b", "\b");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\f", "\f");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\t", "\t");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\n", "\n");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\\"", "\"");
+                    displaySSID = StaticDataSave.networkSSID.replace("\\\'", "\'");
+                    MyLog.i(">> displaySSID = "+displaySSID);
+                    //]]
 
                     if (btn_connect != null) {
-                        btn_connect.setText("Connect to "+StaticDataSave.networkSSID);
+                        //[[change in v2.4.18
+                        //btn_connect.setText("Connect to "+StaticDataSave.networkSSID);
+                        btn_connect.setText("Connect to "+displaySSID);
+                        //]]
                     }
 
                     /*
@@ -647,7 +678,8 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
 
                             StaticDataSave.isHidden = 0;
 
-                            displayAPinfo(StaticDataSave.networkSSID,
+                            displayAPinfo(
+                                    StaticDataSave.networkSSID,
                                     StaticDataSave.networkSecurityNum,
                                     StaticDataSave.networkPassword,
                                     StaticDataSave.isHidden
@@ -686,7 +718,8 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
 
                             StaticDataSave.isHidden = 0;
 
-                            displayAPinfo(StaticDataSave.networkSSID,
+                            displayAPinfo(
+                                    StaticDataSave.networkSSID,
                                     StaticDataSave.networkSecurityNum,
                                     StaticDataSave.networkPassword,
                                     StaticDataSave.isHidden
@@ -952,8 +985,6 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
             }
             mGattCharacteristics.add(charas);
             gattCharacteristicData.add(gattCharacteristicGroupData);
-
-
         }
 
         if (refresh == true && isRefreshed == false && GBG_SVC_CHAR != null) {
@@ -1171,7 +1202,6 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                                                 mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
                                             }
                                         }
-                                        //]]
 
                                         if (StaticDataSave.device.equals("RRQ61400")) {
                                             if (WIFI_SVC_WFCMD != null) {
@@ -1257,7 +1287,44 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                         isSecurity = new boolean[ssidList.size()];
                         level = new Integer[ssidList.size()];
                         for(int i = 0; i < ssidList.size(); i++) {
-                            if (securityList.get(i) == 0 || securityList.get(i) == 5) {
+
+                            //[[modify in v2.4.16
+                            if (StaticDataSave.device.equals("RRQ61400")) {
+                                if (securityList.get(i) == 0) {
+                                    ssid[i] = ssidList.get(i);
+                                    secMode[i] = securityList.get(i);
+                                    isSecurity[i] = false;
+                                    level[i] = signalList.get(i);
+                                    stringSecurity[i] = convertStringSecurity1(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar1(isSecurity[i], level[i]);
+                                } else {
+                                    ssid[i] = ssidList.get(i);
+                                    secMode[i] = securityList.get(i);
+                                    isSecurity[i] = true;
+                                    level[i] = signalList.get(i);
+                                    stringSecurity[i] = convertStringSecurity1(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar1(isSecurity[i], level[i]);
+                                }
+                            } else {
+                                if (securityList.get(i) == 0 || securityList.get(i) == 5) {
+                                    ssid[i] = ssidList.get(i);
+                                    secMode[i] = securityList.get(i);
+                                    isSecurity[i] = false;
+                                    level[i] = signalList.get(i);
+                                    stringSecurity[i] = convertStringSecurity(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                } else {
+                                    ssid[i] = ssidList.get(i);
+                                    secMode[i] = securityList.get(i);
+                                    isSecurity[i] = true;
+                                    level[i] = signalList.get(i);
+                                    stringSecurity[i] = convertStringSecurity(securityList.get(i));
+                                    signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
+                                }
+                            }
+                            //]]
+
+                            /*if (securityList.get(i) == 0 || securityList.get(i) == 5) {
                                 ssid[i] = ssidList.get(i);
                                 secMode[i] = securityList.get(i);
                                 isSecurity[i] = false;
@@ -1289,7 +1356,7 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
                                     signalBar[i] = wifiSignalBar(isSecurity[i], level[i]);
                                 }
                                 //]]
-                            }
+                            }*/
                         }
 
                         apRowItems = new ArrayList<APRowItem>();
@@ -1524,15 +1591,6 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
             e.printStackTrace();
         }
 
-        //[[add in v2.4.15
-        /*if (StaticDataSave.device.equals("RRQ61400")) {
-            if (WIFI_SVC_WFACT_RES != null) {
-                MyLog.i("SUBSCRIBE: WiFi Status");
-                mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
-            }
-        }*/
-        //]]
-
         if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFCMD != null) {
                 mBluetoothLeService.writeCharacteristic(WIFI_SVC_WFCMD, obj.toString());
@@ -1704,8 +1762,24 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
         JsonElement je = jp.parse(result);
         result_split = gson.toJson(je);
 
+        //[[add in v2.4.18
+        String replace_result_split;
+        replace_result_split = result_split.replace("\\\\", "\\");
+        replace_result_split = result_split.replace("\\r", "\r");
+        replace_result_split = result_split.replace("\\b", "\b");
+        replace_result_split = result_split.replace("\\f", "\f");
+        replace_result_split = result_split.replace("\\t", "\t");
+        replace_result_split = result_split.replace("\\n", "\n");
+        replace_result_split = result_split.replace("\\\"", "\"");
+        replace_result_split = result_split.replace("\\\'", "\'");
+        MyLog.i(">> replace_result_split = "+replace_result_split);
+        //]]
+
         if (et_rawCommand2 != null) {
-            et_rawCommand2.setText(result_split);
+            //[[change in v2.4.18
+            //et_rawCommand2.setText(result_split);
+            et_rawCommand2.setText(replace_result_split);
+            //]]
         }
     }
 
@@ -1786,13 +1860,13 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
             e.printStackTrace();
         }
 
-        //[[add in v2.4.15
-        if (StaticDataSave.device.equals("RRQ61400")) {
+        //[[remove in v2.4.17
+        /*if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFACT_RES != null) {
                 MyLog.i("SUBSCRIBE: WiFi Status");
                 mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
             }
-        }
+        }*/
         //]]
 
         if (StaticDataSave.device.equals("RRQ61400")) {
@@ -1819,13 +1893,15 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
             e.printStackTrace();
         }
 
+        //[[remove in v2.4.17
         //[[add in v2.4.15
-        if (StaticDataSave.device.equals("RRQ61400")) {
+        /*if (StaticDataSave.device.equals("RRQ61400")) {
             if (WIFI_SVC_WFACT_RES != null) {
                 MyLog.i("SUBSCRIBE: WiFi Status");
                 mBluetoothLeService.setCharacteristicNotification(WIFI_SVC_WFACT_RES, true);
             }
-        }
+        }*/
+        //]]
         //]]
 
         if (StaticDataSave.device.equals("RRQ61400")) {
@@ -2038,6 +2114,7 @@ public class DeviceControlActivity extends BaseActivity implements TextWatcher {
     }
 
     public void showCheckingDialog() {
+        MyLog.i(">> showCheckingDialog()");
         if (checkingDialog == null) {
             checkingDialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
             checkingDialog.setTitle("Checking the network connection");
